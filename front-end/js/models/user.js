@@ -11,7 +11,14 @@ function User($resource, API){
       'save':      { method: 'POST' },
       'query':     { method: 'GET', isArray: false},
       'remove':    { method: 'DELETE' },
-      'delete':    { method: 'DELETE' }
-    }
-  );
+      'delete':    { method: 'DELETE' },
+      'register': {
+          url: API +'/register',
+          method: "POST"
+        },
+        'login':      {
+          url: API + '/login',
+          method: "POST"
+        }
+    });
 }

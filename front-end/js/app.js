@@ -2,6 +2,9 @@ angular
   .module('logging', ['ngResource', 'angular-jwt', 'ui.router'])
   .constant('API', 'http://localhost:3000/api')
   .config(MainRouter)
+  .config(function($httpProvider) {
+      $httpProvider.interceptors.push('authInterceptor');
+    })
 
 MainRouter.$inject = ['$stateProvider', '$urlRouterProvider'];
 function MainRouter($stateProvider, $urlRouterProvider) {

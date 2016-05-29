@@ -2,8 +2,8 @@ angular
   .module('logging')
   .controller('UsersController', UsersController);
 
-UsersController.$inject = ['User'];
-function UsersController(User){
+UsersController.$inject = ['User', 'CurrentUser', '$state'];
+function UsersController(User, CurrentUser, $state){
 
   var self = this;
 
@@ -24,22 +24,37 @@ function UsersController(User){
   }
 
   function handleLogin(res) {
-  }
+    console.log(res);
+
+    var token = res.token ? res.token : null
+    if (token) {
+          self.getUsers();
+          $state.go('home');
+        }
+        self.currentUser = CurrentUser.getUser();
+    } 
 
   function handleError(e) {
     self.error = "Something went wrong.";
   }
 
-  function register() {
-  }
+   function register() {
+       User.register(self.user, handleLogin, handleError);
+   }
 
-  function login() {
-  }
+   function login() {
+       User.login(self.user, handleLogin, handleError);
+   }
 
   function logout() {
+    self.all         = [];
+    self.currentUser = null;
+    CurrentUser.clearUser();
   }
 
   function checkLoggedIn() {
+    self.currentUser = CurrentUser.getUser();
+    return !!self.currentUser;
   }
 
   if (checkLoggedIn()) {
