@@ -1,3 +1,4 @@
+<h1 ng-controller="GroupsController as groups">Groups</h1>
 <ul class="media-list">
   <li class="media" ng-repeat="group in groups.all">
     <div class="media-left">
@@ -10,4 +11,6 @@
       <p>{{ group.local.description }}</p>
     </div>
   </li>
+  <input type="text" ng-model="group.newGroup.name">
+  <button type="button" ng-click="group.createGroup()">Create Group</button>
 </ul>

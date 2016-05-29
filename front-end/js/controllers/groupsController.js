@@ -2,15 +2,14 @@ angular
   .module('nuschools')
   .controller('GroupsController', GroupsController);
 
-GroupsController.$inject = ['Group', '$state'];
-function GroupsController(Group, $state){
+GroupsController.$inject = ['Group', '$state', '$scope'];
+function GroupsController(Group, $state, $scope){
 
   var self = this;
 
-  self.all            = [];
-  self.group          = null;
-  self.error          = null;
+  self.group          = {};
   self.getGroups      = getGroups;
+  self.createGroup    = createGroup;
 
   function getGroups() {
     Group.query(function(data){
@@ -18,6 +17,15 @@ function GroupsController(Group, $state){
     });
   }
 
+  function createGroup(){
+    var user = $scope.$parent.groups.group;
+    self.group.user = user.username;
+
+    Group.save({ group: self.group }, function(group) {
+      user.groups.push(group);
+      self.group = {};
+    });
+  }
 
   return self;
 }

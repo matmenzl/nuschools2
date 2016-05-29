@@ -12,5 +12,6 @@ function Group($resource, API){
       'query':     { method: 'GET', isArray: false},
       'remove':    { method: 'DELETE' },
       'delete':    { method: 'DELETE' },
+      'update':    { method: 'PUT' }
     });
 }
