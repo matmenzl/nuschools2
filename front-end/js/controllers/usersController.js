@@ -1,5 +1,5 @@
 angular
-  .module('logging')
+  .module('nuschools')
   .controller('UsersController', UsersController);
 
 UsersController.$inject = ['User', 'CurrentUser', '$state'];

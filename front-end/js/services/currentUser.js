@@ -1,5 +1,5 @@
 angular
-  .module('logging')
+  .module('nuschools')
   .service("CurrentUser", CurrentUser);
 
 CurrentUser.$inject = ["TokenService"];

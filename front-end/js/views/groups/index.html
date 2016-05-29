@@ -1,0 +1,13 @@
+<ul class="media-list">
+  <li class="media" ng-repeat="group in groups.all">
+    <div class="media-left">
+      <a ui-sref="group({ id: group._id })">
+        <img class="media-object" ng-src="{{ group.local.image }}">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{ group.local.title }}</h4>
+      <p>{{ group.local.description }}</p>
+    </div>
+  </li>
+</ul>

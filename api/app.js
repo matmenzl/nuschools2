@@ -13,6 +13,7 @@ var app            = express();
 
 var config         = require('./config/config');
 var User           = require('./models/user');
+var Group          = require('./models/group');
 var secret         = require('./config/config').secret;
 
 mongoose.connect(config.database);

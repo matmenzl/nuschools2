@@ -1,5 +1,5 @@
 angular
-  .module('logging', ['ngResource', 'angular-jwt', 'ui.router'])
+  .module('nuschools', ['ngResource', 'angular-jwt', 'ui.router'])
   .constant('API', 'http://localhost:3000/api')
   .config(MainRouter)
   .config(function($httpProvider) {
@@ -31,6 +31,19 @@ function MainRouter($stateProvider, $urlRouterProvider) {
       controller: function($scope, $stateParams, User) {
         User.get({ id: $stateParams.id }, function(res){
           $scope.$parent.users.user = res.user;
+        });
+      }
+    })
+    .state('groups', {
+      url: "/groups",
+      templateUrl: "./js/views/groups/index.html"
+    })
+    .state('group', {
+      url: "/groups/;id",
+      templateUrl: "./js/views/groups/show.html",
+      controller: function($scope, $stateParams, Group) {
+        Group.get({ id: $stateParams.id}, function(res){
+          $scope.$parent.groups.group = res.group;
         });
       }
     });

@@ -1,5 +1,5 @@
 angular
-  .module('logging')
+  .module('nuschools')
   .service('TokenService', TokenService)
 
   TokenService.$inject = ["$window", "jwtHelper"];
