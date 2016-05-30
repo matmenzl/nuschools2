@@ -29,10 +29,10 @@ app.use(methodOverride(function(req, res){
 }));
 
 
-app.use(express.static(__dirname + "/front-end"));
+app.use(express.static(__dirname + "/public"));
 
 app.get("*", function(req, res) {
-    res.sendFile(__dirname + "/front-end/index.html");
+    res.sendFile(__dirname + "/public/index.html");
 });
 
 app.use(bodyParser.json());

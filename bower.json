@@ -1,0 +1,21 @@
+{
+  "name": "nuschools",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "matmenzl <info@mathiasmenzl.ch>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/matmenzl/nuschools2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.6",
+    "bootstrap": "^3.3.6"
+  }
+}

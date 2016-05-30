@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost:27017/angular-authentication');
+mongoose.connect('mongodb://localhost:27017/nuschools');
 
 var Group = require("../models/group");
 

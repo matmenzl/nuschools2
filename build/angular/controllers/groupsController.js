@@ -2,8 +2,8 @@ angular
   .module('nuschools')
   .controller('GroupsController', GroupsController);
 
-GroupsController.$inject = ['Group', '$state', '$scope'];
-function GroupsController(Group, $state, $scope){
+GroupsController.$inject = ['Group', '$state'];
+function GroupsController(Group, $state){
 
   var self = this;
 
@@ -21,7 +21,7 @@ function GroupsController(Group, $state, $scope){
 
   function createGroup(){
     Group.save(function(data) {
-      groups.push(group);
+      group.push(group);
       self.all = [];
     });
   }

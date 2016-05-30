@@ -8,8 +8,7 @@ function groupsIndex(req, res) {
 }
 
 function groupsCreate(req, res) {
-  console.log('in POST');
-  console.log('body:',request.body);
+  console.log('hello');
   var group = new Group(request.body);
   group.save(function(error) {
     if(error) response.json({messsage: error});
