@@ -17,24 +17,33 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" ui-sref-active="active" ui-sref="home">Nuschools</a>
+          <a class="navbar-brand" ui-sref-active="active" ui-sref="home">Nuschools</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li ng-show="users.checkLoggedIn()">
-             <a href="#" ui-sref="users">Users</a>
+              <a ui-sref="usersIndex">Users (Testing)</a>
             </li>
             <li ng-show="users.checkLoggedIn()">
-             <a href="#" ui-sref="groups">Groups</a>
-            </li>
-            <li ng-hide="users.checkLoggedIn()">
-             <a href="#" ui-sref="login">Login</a>
-            </li>
-            <li ng-hide="users.checkLoggedIn()">
-             <a href="#" ui-sref="register">Register</a>
+              <a ui-sref="usersIndex">Teachers</a>
             </li>
             <li ng-show="users.checkLoggedIn()">
-             <a href="#"ui-sref="home" ng-click="users.logout()">Logout</a>
+              <a ui-sref="groupsIndex">Browse Groups</a>
+            </li>
+            <li ng-show="users.checkLoggedIn()">
+              <a ui-sref="groupsIndex">My Groups</a>
+            </li>
+            <li ng-show="users.checkLoggedIn()">
+              <a ui-sref="groupsNew">Create Group</a>
+            </li>
+            <li ng-hide="users.checkLoggedIn()">
+              <a ui-sref="login">Login</a>
+            </li>
+            <li ng-hide="users.checkLoggedIn()">
+              <a ui-sref="register">Register</a>
+            </li>
+            <li ng-show="users.checkLoggedIn()">
+              <a ui-sref="home" ng-click="users.logout()">Logout</a>
             </li>
          </ul>
         </div>

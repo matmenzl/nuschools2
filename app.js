@@ -28,7 +28,6 @@ app.use(methodOverride(function(req, res){
   }
 }));
 
-
 app.use(express.static(__dirname + "/public"));
 
 app.get("*", function(req, res) {
@@ -46,9 +45,7 @@ app.use('/api', expressJWT({ secret: secret })
   .unless({
     path: [
       { url: '/api/login', methods: ['POST'] },
-      { url: '/api/register', methods: ['POST'] },
-      { url: '/api/groups', methods: ['POST', 'GET'] },
-      { url: '/api/users', methods: ['POST', 'GET'] }
+      { url: '/api/register', methods: ['POST'] }
     ]
   }));
 
@@ -58,6 +55,28 @@ app.use(function (err, req, res, next) {
   }
   next();
 });
+
+app.use(assignUser);
+
+/*
+ * Assign user from the JWT token payload
+ */
+function assignUser(req, res, next) {
+  if (req.user) {
+    User
+    .findById({ _id: req.user._doc._id })
+    .then(function(user) {
+      if (!user) return res.status(401).json({message: 'No user found'});
+      req.user = user;
+      next();
+    })
+    .catch(function(err){
+      return res.status(401).json({message: 'No user found'});
+    });
+  } else {
+    next();
+  }
+}
 
 var routes = require('./config/routes');
 app.use("/api", routes);

@@ -9,7 +9,6 @@ function GroupsShowController(Group, $stateParams){
 
   function getGroup() {
     Group.get($stateParams, function(data){
-      console.log(data);
       self.group = data.group;
     });
   }

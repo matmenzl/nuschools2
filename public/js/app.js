@@ -48708,23 +48708,29 @@ function MainRouter($stateProvider, $urlRouterProvider) {
       url: "/register",
       templateUrl: "../views/authentications/register.html"
     })
-    .state('users', {
+    .state('usersIndex', {
       url: "/users",
       templateUrl: "../views/users/index.html"
     })
-    .state('user', {
+    .state('usersShow', {
       url: "/users/:id",
       templateUrl: "../views/users/show.html",
       controller: "UsersShowController",
       controllerAs: "users"
     })
-    .state('groups', {
+    .state('groupsIndex', {
       url: "/groups",
       templateUrl: "../views/groups/index.html",
       controller: "GroupsIndexController",
       controllerAs: "groups"
     })
-    .state('group', {
+    .state('groupsNew', {
+      url: "/groups/new",
+      templateUrl: "../views/groups/new.html",
+      controller: "GroupsNewController",
+      controllerAs: "groups"
+    })
+    .state('groupsShow', {
       url: "/groups/:id",
       templateUrl: "../views/groups/show.html",
       controller: "GroupsShowController",
@@ -48748,25 +48754,36 @@ function GroupsIndexController(Group, $state){
 
   self.all            = [];
   self.getGroups      = getGroups;
-  self.createGroup    = createGroup;
 
   function getGroups() {
     Group.query(function(data){
       self.all = data.groups;
-      console.log(data);
-    });
-  }
-
-  function createGroup(){
-    Group.save(self.group).$promise.then(function(data) {
-      console.log(data);
-      self.all.push(data.group);
-      self.group = null;
     });
   }
 
   // Should only call when you are logged in
   getGroups();
+
+  return self;
+}
+
+angular
+  .module('nuschools')
+  .controller('GroupsNewController', GroupsNewController);
+
+GroupsNewController.$inject = ['Group', '$state', '$stateParams'];
+function GroupsNewController(Group, $state, $stateParams){
+
+  var self         = this;
+  self.createGroup = createGroup;
+
+  function createGroup(){
+    console.log("Submitted")
+    Group.save(self.group).$promise.then(function(data) {
+      console.log(data)
+      $state.go("groupsIndex");
+    });
+  }
 
   return self;
 }
@@ -48782,7 +48799,6 @@ function GroupsShowController(Group, $stateParams){
 
   function getGroup() {
     Group.get($stateParams, function(data){
-      console.log(data);
       self.group = data.group;
     });
   }
@@ -48868,7 +48884,6 @@ function UsersShowController(User, $stateParams){
 
   function getUser() {
     User.get($stateParams, function(data){
-      console.log(data);
       self.user = data.user;
     });
   }

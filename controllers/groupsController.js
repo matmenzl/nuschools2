@@ -1,14 +1,29 @@
 var Group   = require('../models/group');
 
 function groupsIndex(req, res) {
+  // Find a users' groups
+  if (req.params.id) {
+    Group.find({ user: req.params.id }, function(err, groups){
+      if (err) return res.status(404).json({message: 'Something went wrong.'});
+      return res.status(200).json({ groups: groups });
+    });
+  }
+
+  // Find all groups
   Group.find(function(err, groups){
     if (err) return res.status(404).json({message: 'Something went wrong.'});
-    res.status(200).json({ groups: groups });
+    return res.status(200).json({ groups: groups });
   });
 }
 
 function groupsCreate(req, res) {
-  var group = new Group(req.body);
+  var group   = new Group(req.body);
+  group.owner = req.user._id;
+
+  // If you have selected to teach this class, you will be assigned as the teacher
+  if (req.body.teach) {
+    group.teacher = req.user._id;
+  } 
 
   group.save(function(err, group) {
     if (err) return res.json({messsage: err});
@@ -17,7 +32,10 @@ function groupsCreate(req, res) {
 }
 
 function groupsShow(req, res){
-  Group.findById(req.params.id, function(err, group){
+  Group
+  .findById(req.params.id)
+  .populate(["owner", "teacher", "students"])
+  .exec(function(err, group){
     if (err) return res.status(404).json({message: 'Something went wrong.'});
     return res.status(200).json({ group: group });
   });

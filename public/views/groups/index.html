@@ -1,19 +1,27 @@
-<h1>Groups</h1>
+<h2>Groups</h2>
 <ul class="media-list">
   <li class="media" ng-repeat="group in groups.all">
     <div class="media-left">
-      <a ui-sref="group({ id: group._id })">
+      <a ui-sref="groupsShow({ id: group._id })">
         <img class="media-object" ng-src="{{ group.image }}">
       </a>
     </div>
     <div class="media-body">
-      <a ui-sref="group({ id: group._id })">
+      <a ui-sref="groupsShow({ id: group._id })">
         <h4 class="media-heading">{{ group.title }}</h4>
       </a>
       <p>{{ group.description }}</p>
+      <ul>
+        <li ng-hide="group.teacher">
+          <button class="btn btn-default">Request to Teach</button>
+        </li>
+        <li>
+          <button class="btn btn-default">Join</button>
+        </li>
+        <li>
+          <button ui-sref="groupsShow({ id: group._id })" class="btn btn-default">More Info</button>
+        </li>
+      </ul>
     </div>
   </li>
-  <input type="text" ng-model="groups.group.title" placeholder="Title">
-  <input type="text" ng-model="groups.group.description" placeholder="Description">
-  <button type="button" ng-click="groups.createGroup()">Create Group</button>
 </ul>

@@ -17,23 +17,29 @@ function MainRouter($stateProvider, $urlRouterProvider) {
       url: "/register",
       templateUrl: "../views/authentications/register.html"
     })
-    .state('users', {
+    .state('usersIndex', {
       url: "/users",
       templateUrl: "../views/users/index.html"
     })
-    .state('user', {
+    .state('usersShow', {
       url: "/users/:id",
       templateUrl: "../views/users/show.html",
       controller: "UsersShowController",
       controllerAs: "users"
     })
-    .state('groups', {
+    .state('groupsIndex', {
       url: "/groups",
       templateUrl: "../views/groups/index.html",
       controller: "GroupsIndexController",
       controllerAs: "groups"
     })
-    .state('group', {
+    .state('groupsNew', {
+      url: "/groups/new",
+      templateUrl: "../views/groups/new.html",
+      controller: "GroupsNewController",
+      controllerAs: "groups"
+    })
+    .state('groupsShow', {
       url: "/groups/:id",
       templateUrl: "../views/groups/show.html",
       controller: "GroupsShowController",

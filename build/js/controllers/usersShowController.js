@@ -9,7 +9,6 @@ function UsersShowController(User, $stateParams){
 
   function getUser() {
     User.get($stateParams, function(data){
-      console.log(data);
       self.user = data.user;
     });
   }

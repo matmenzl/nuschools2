@@ -3,11 +3,10 @@ var mongoose = require("mongoose");
 var groupSchema = mongoose.Schema({
   title: { type: String, unique: true, required: true },
   description: { type: String },
-  studentNumber: { type: Number },
-  lookingForStudents: { type: Boolean },
-  lookingForTeacher: { type: Boolean },
   image: { type: String },
-  user: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]
+  owner: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  teacher: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  students: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   }, {
   timestamps: true
 });
