@@ -44,6 +44,12 @@ function MainRouter($stateProvider, $urlRouterProvider) {
       templateUrl: "../views/groups/show.html",
       controller: "GroupsShowController",
       controllerAs: "groups"
+    })
+    .state('requestsIndex', {
+      url: "/requests",
+      templateUrl: "../views/requests/index.html",
+      controller: "RequestsIndexController",
+      controllerAs: "requests"
     });
 
   $urlRouterProvider.otherwise("/");

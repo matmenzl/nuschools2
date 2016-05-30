@@ -48735,6 +48735,12 @@ function MainRouter($stateProvider, $urlRouterProvider) {
       templateUrl: "../views/groups/show.html",
       controller: "GroupsShowController",
       controllerAs: "groups"
+    })
+    .state('requestsIndex', {
+      url: "/requests",
+      templateUrl: "../views/requests/index.html",
+      controller: "RequestsIndexController",
+      controllerAs: "requests"
     });
 
   $urlRouterProvider.otherwise("/");
@@ -48811,6 +48817,30 @@ function GroupsShowController(Group, $stateParams){
   }
 
   getGroup();
+
+  return self;
+}
+
+angular
+  .module('nuschools')
+  .controller('RequestsIndexController', RequestsIndexController);
+
+RequestsIndexController.$inject = ['Request'];
+function RequestsIndexController(Request){
+
+  var self          = this;
+
+  self.all          = [];
+  self.getRequests  = getRequests;
+
+  function getRequests() {
+    Request.query(function(data){
+      self.all = data.requests;
+    });
+  }
+
+  // Should only call when you are logged in
+  getRequests();
 
   return self;
 }
@@ -48980,6 +49010,7 @@ function AuthInterceptor(API, TokenService) {
   return {
     request: function(config) {
       var token = TokenService.getToken();
+      console.log(token);
 
       if (config.url.indexOf(API) === 0 && token) {
         config.headers.Authorization = 'Bearer ' + token;
@@ -48987,6 +49018,7 @@ function AuthInterceptor(API, TokenService) {
       return config;
     },
     response: function(res){
+      
       if (res.config.url.indexOf(API) === 0 && res.data.token) {
         TokenService.setToken(res.data.token);
       }

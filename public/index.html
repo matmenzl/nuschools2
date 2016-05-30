@@ -36,6 +36,9 @@
             <li ng-show="users.checkLoggedIn()">
               <a ui-sref="groupsNew">Create Group</a>
             </li>
+            <li ng-show="users.checkLoggedIn()">
+              <a ui-sref="requestsIndex">Requests</a>
+            </li>
             <li ng-hide="users.checkLoggedIn()">
               <a ui-sref="login">Login</a>
             </li>

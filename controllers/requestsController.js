@@ -1,7 +1,13 @@
 var Request = require("../models/request");
 
 function requestsIndex(req, res, next){
-
+  Request 
+  .find({ owner: req.user._id })
+  .populate(["teacher", "group"])
+  .exec(function(err, requests){
+    if (err) return res.status(500).json({message: 'Something went wrong.'});
+    return res.status(200).json({requests: requests});
+  })
 }
 
 /*

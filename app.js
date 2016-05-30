@@ -62,9 +62,14 @@ app.use(assignUser);
  * Assign user from the JWT token payload
  */
 function assignUser(req, res, next) {
-  if (req.user) {
+  if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+    payload = req.headers.authorization.split(' ')[1];
+  }
+  var decodedUser = jwt.verify(payload, secret)
+
+  if (decodedUser._doc) {
     User
-    .findById({ _id: req.user._doc._id })
+    .findById({ _id: decodedUser._doc._id })
     .then(function(user) {
       if (!user) return res.status(401).json({message: 'No user found'});
       req.user = user;
