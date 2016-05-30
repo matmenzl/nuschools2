@@ -48678,11 +48678,20 @@ angular.module('ui.router.state')
 })(window, window.angular);
 angular
   .module('nuschools', ['ngResource', 'angular-jwt', 'ui.router'])
-  .constant('API', 'http://localhost:3000/api')
-  .config(MainRouter)
   .config(function($httpProvider) {
       $httpProvider.interceptors.push('authInterceptor');
-    })
+    });
+angular
+  .module('nuschools')
+  .config(Interceptor);
+
+Interceptor.$inject = ["$httpProvider"];
+function Interceptor($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor');
+}
+angular
+  .module('nuschools')
+  .config(MainRouter);
 
 MainRouter.$inject = ['$stateProvider', '$urlRouterProvider'];
 function MainRouter($stateProvider, $urlRouterProvider) {
@@ -48706,24 +48715,20 @@ function MainRouter($stateProvider, $urlRouterProvider) {
     .state('user', {
       url: "/users/:id",
       templateUrl: "../views/users/show.html",
-      controller: function($scope, $stateParams, User) {
-        User.get({ id: $stateParams.id }, function(res){
-          $scope.$parent.users.user = res.user;
-        });
-      }
+      controller: "UsersShowController",
+      controllerAs: "users"
     })
     .state('groups', {
       url: "/groups",
-      templateUrl: "../views/groups/index.html"
+      templateUrl: "../views/groups/index.html",
+      controller: "GroupsIndexController",
+      controllerAs: "groups"
     })
     .state('group', {
       url: "/groups/:id",
       templateUrl: "../views/groups/show.html",
-      controller: function($scope, $stateParams, Group) {
-        Group.get({ id: $stateParams.id}, function(res){
-          $scope.$parent.groups.group = res.group;
-        });
-      }
+      controller: "GroupsShowController",
+      controllerAs: "groups"
     });
 
   $urlRouterProvider.otherwise("/");
@@ -48731,10 +48736,13 @@ function MainRouter($stateProvider, $urlRouterProvider) {
 
 angular
   .module('nuschools')
-  .controller('GroupsController', GroupsController);
+  .constant('API', 'http://localhost:3000/api');
+angular
+  .module('nuschools')
+  .controller('GroupsIndexController', GroupsIndexController);
 
-GroupsController.$inject = ['Group', '$state'];
-function GroupsController(Group, $state){
+GroupsIndexController.$inject = ['Group', '$state'];
+function GroupsIndexController(Group, $state){
 
   var self = this;
 
@@ -48764,11 +48772,32 @@ function GroupsController(Group, $state){
 }
 
 angular
-.module('nuschools')
-.controller('UsersController', UsersController);
+  .module('nuschools')
+  .controller('GroupsShowController', GroupsShowController);
 
-UsersController.$inject = ['User', 'CurrentUser', '$state'];
-function UsersController(User, CurrentUser, $state){
+GroupsShowController.$inject = ['Group', '$stateParams'];
+function GroupsShowController(Group, $stateParams){
+
+  var self = this;
+
+  function getGroup() {
+    Group.get($stateParams, function(data){
+      console.log(data);
+      self.group = data.group;
+    });
+  }
+
+  getGroup();
+
+  return self;
+}
+
+angular
+.module('nuschools')
+.controller('UsersIndexController', UsersIndexController);
+
+UsersIndexController.$inject = ['User', 'CurrentUser', '$state'];
+function UsersIndexController(User, CurrentUser, $state){
 
   var self = this;
 
@@ -48825,6 +48854,27 @@ function UsersController(User, CurrentUser, $state){
     self.getUsers();
   }
 
+  return self;
+}
+
+angular
+.module('nuschools')
+.controller('UsersShowController', UsersShowController);
+
+UsersShowController.$inject = ['User', '$stateParams'];
+function UsersShowController(User, $stateParams){
+
+  var self = this;
+
+  function getUser() {
+    User.get($stateParams, function(data){
+      console.log(data);
+      self.user = data.user;
+    });
+  }
+
+  getUser();
+  
   return self;
 }
 

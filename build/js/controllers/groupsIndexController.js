@@ -1,9 +1,9 @@
 angular
   .module('nuschools')
-  .controller('GroupsController', GroupsController);
+  .controller('GroupsIndexController', GroupsIndexController);
 
-GroupsController.$inject = ['Group', '$state'];
-function GroupsController(Group, $state){
+GroupsIndexController.$inject = ['Group', '$state'];
+function GroupsIndexController(Group, $state){
 
   var self = this;
 

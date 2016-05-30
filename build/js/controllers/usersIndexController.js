@@ -1,9 +1,9 @@
 angular
 .module('nuschools')
-.controller('UsersController', UsersController);
+.controller('UsersIndexController', UsersIndexController);
 
-UsersController.$inject = ['User', 'CurrentUser', '$state'];
-function UsersController(User, CurrentUser, $state){
+UsersIndexController.$inject = ['User', 'CurrentUser', '$state'];
+function UsersIndexController(User, CurrentUser, $state){
 
   var self = this;
 

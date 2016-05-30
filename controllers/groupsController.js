@@ -9,7 +9,6 @@ function groupsIndex(req, res) {
 
 function groupsCreate(req, res) {
   var group = new Group(req.body);
-  console.log(req.body, "////////////////////////");
 
   group.save(function(err, group) {
     if (err) return res.json({messsage: err});
@@ -17,25 +16,10 @@ function groupsCreate(req, res) {
   });
 }
 
-
-// function groupsCreate(req, res){
-//   var group = new Group(req.body.group);
-//   group.save(function(err){
-//     if (err) return res.status(500).send(err);
-//     var name = req.body.group.user;
-//     User.findOne({ username: username }, function(err, user){
-//       user.groups.push(group);
-//       user.save(function(err, user) {
-//         res.status(201).send(group);
-//       });
-//     });
-//   });
-// }
-
 function groupsShow(req, res){
-  Group.findById(req.params.id, function(err, user){
+  Group.findById(req.params.id, function(err, group){
     if (err) return res.status(404).json({message: 'Something went wrong.'});
-    res.status(200).json({ group: group });
+    return res.status(200).json({ group: group });
   });
 }
 
