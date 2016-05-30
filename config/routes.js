@@ -15,7 +15,8 @@ router.route('/users')
   .get(usersController.usersIndex);
 
 router.route('/groups')
-  .get(groupsController.groupsIndex);
+  .get(groupsController.groupsIndex)
+  .post(groupsController.groupsCreate);
 
 router.route('/users/:id')
   .get(usersController.usersShow)
@@ -25,6 +26,7 @@ router.route('/users/:id')
 router.route('/groups/:id')
   .get(groupsController.groupsShow)
   .patch(groupsController.groupsUpdate)
+  .post(groupsController.groupsCreate)
   .delete(groupsController.groupsDelete);
 
 module.exports = router;

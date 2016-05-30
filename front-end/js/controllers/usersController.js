@@ -24,8 +24,6 @@ function UsersController(User, CurrentUser, $state){
   }
 
   function handleLogin(res) {
-    console.log(res);
-
     var token = res.token ? res.token : null
     if (token) {
           self.getUsers();

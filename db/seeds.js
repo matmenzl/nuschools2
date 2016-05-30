@@ -9,15 +9,21 @@ var group1 = new Group({
   description: "learn angular js",
   link: "https://www.angularjs.com",
   studentNumber: 1,
-  lookingForStudents: yes,
-  lookingForTeacher: yes,
+  lookingForStudents: true,
+  lookingForTeacher: true,
   image: "http://fillmurray.com/320/320",
+}, {
+  user: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]
+
 })
 
 group1.save(function(err, thing){
   if (err) return console.log(err);
   console.log("group saved", thing);
 })
+
+
+// user-id:   573d9b54727feb2f1f018a0e
 
 
 

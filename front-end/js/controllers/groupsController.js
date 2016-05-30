@@ -7,25 +7,23 @@ function GroupsController(Group, $state, $scope){
 
   var self = this;
 
-  self.group          = {};
+  self.all            = [];
   self.getGroups      = getGroups;
   self.createGroup    = createGroup;
 
   function getGroups() {
+    console.log("0");
     Group.query(function(data){
       self.all = data.groups;
+      console.log(data);
     });
   }
 
   function createGroup(){
-    var user = $scope.$parent.groups.group;
-    self.group.user = user.username;
-
-    Group.save({ group: self.group }, function(group) {
-      user.groups.push(group);
-      self.group = {};
+    Group.save(function(data) {
+      groups.push(group);
+      self.all = [];
     });
   }
-
   return self;
 }

@@ -28,6 +28,13 @@ app.use(methodOverride(function(req, res){
   }
 }));
 
+
+app.use(express.static(__dirname + "/front-end"));
+
+app.get("*", function(req, res) {
+    res.sendFile(__dirname + "/front-end/index.html");
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
