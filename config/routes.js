@@ -1,9 +1,10 @@
 var express = require('express');
 var router  = express.Router();
 
-var usersController = require('../controllers/usersController');
-var groupsController = require('../controllers/groupsController' );
+var usersController           = require('../controllers/usersController');
+var groupsController          = require('../controllers/groupsController' );
 var authenticationsController = require('../controllers/authenticationsController');
+var requestsController        = require('../controllers/requestsController');
 
 router.post('/login', authenticationsController.login);
 router.post('/register', authenticationsController.register);
@@ -28,5 +29,13 @@ router.route('/groups/:id')
   .patch(groupsController.groupsUpdate)
   .post(groupsController.groupsCreate)
   .delete(groupsController.groupsDelete);
+
+router.route("/requests")
+  .get(requestsController.requestsIndex)
+  .post(requestsController.requestsCreate);
+router.route("/requests/:id/accept")
+  .post(requestsController.requestsAccept) 
+router.route("/requests/:id/reject")
+  .post(requestsController.requestsAccept) 
 
 module.exports = router;

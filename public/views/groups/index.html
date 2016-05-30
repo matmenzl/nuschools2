@@ -8,12 +8,26 @@
     </div>
     <div class="media-body">
       <a ui-sref="groupsShow({ id: group._id })">
-        <h4 class="media-heading">{{ group.title }}</h4>
+        <h3 class="media-heading">{{ group.title }}</h3>
       </a>
+      <p>
+        <strong>Created by: 
+          <a ui-sref="usersShow({ id: group.owner._id })">
+            {{ group.owner.username }}
+          </a>
+        </strong>
+      </p>
+      <p ng-show="group.teacher">
+        <strong>Taught by: 
+          <a ui-sref="usersShow({ id: group.teacher._id })">
+            {{ group.teacher.username }}
+          </a>
+        </strong>
+      </p>
       <p>{{ group.description }}</p>
       <ul>
         <li ng-hide="group.teacher">
-          <button class="btn btn-default">Request to Teach</button>
+          <button class="btn btn-default" ng-click="groups.requestToTeach(group._id, group.owner._id)">Request to Teach</button>
         </li>
         <li>
           <button class="btn btn-default">Join</button>

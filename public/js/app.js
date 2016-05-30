@@ -48747,18 +48747,25 @@ angular
   .module('nuschools')
   .controller('GroupsIndexController', GroupsIndexController);
 
-GroupsIndexController.$inject = ['Group', '$state'];
-function GroupsIndexController(Group, $state){
+GroupsIndexController.$inject = ['Group', '$state', 'Request'];
+function GroupsIndexController(Group, $state, Request){
 
   var self = this;
 
   self.all            = [];
   self.getGroups      = getGroups;
+  self.requestToTeach = requestToTeach;
 
   function getGroups() {
     Group.query(function(data){
       self.all = data.groups;
     });
+  }
+
+  function requestToTeach(group_id, owner_id){
+    Request.save({ group: group_id, owner: owner_id}).$promise.then(function(data){
+      console.log(data);
+    })
   }
 
   // Should only call when you are logged in
@@ -48908,6 +48915,32 @@ function Group($resource, API){
       'remove':    { method: 'DELETE' },
       'delete':    { method: 'DELETE' },
       'update':    { method: 'PUT' }
+    });
+}
+
+angular
+  .module('nuschools')
+  .factory('Request', Request);
+
+Request.$inject = ['$resource', 'API'];
+function Request($resource, API){
+
+  return $resource(
+    API+'/requests/:id', {id: '@id'},
+    { 
+      'get':       { method: 'GET' },
+      'save':      { method: 'POST' },
+      'query':     { method: 'GET', isArray: false},
+      'remove':    { method: 'DELETE' },
+      'delete':    { method: 'DELETE' },
+      'accept': {
+        url: API + '/request/:id/accept',
+        method: "POST"
+      },
+      'reject':      {
+        url: API +  '/request/:id/reject',
+        method: "POST"
+      }
     });
 }
 

@@ -3,14 +3,20 @@ var Group   = require('../models/group');
 function groupsIndex(req, res) {
   // Find a users' groups
   if (req.params.id) {
-    Group.find({ user: req.params.id }, function(err, groups){
+    Group
+    .find({ user: req.params.id })
+    .populate(["owner", "teacher"])
+    .exec(function(err, groups){
       if (err) return res.status(404).json({message: 'Something went wrong.'});
       return res.status(200).json({ groups: groups });
     });
   }
 
   // Find all groups
-  Group.find(function(err, groups){
+  Group
+  .find()
+  .populate(["owner", "teacher"])
+  .exec(function(err, groups){
     if (err) return res.status(404).json({message: 'Something went wrong.'});
     return res.status(200).json({ groups: groups });
   });
