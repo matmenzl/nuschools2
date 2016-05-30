@@ -8,11 +8,12 @@ function groupsIndex(req, res) {
 }
 
 function groupsCreate(req, res) {
-  console.log('hello');
-  var group = new Group(request.body);
-  group.save(function(error) {
-    if(error) response.json({messsage: error});
-    response.json({group: group});
+  var group = new Group(req.body);
+  console.log(req.body, "////////////////////////");
+
+  group.save(function(err, group) {
+    if (err) return res.json({messsage: err});
+    return res.status(200).json({group: group});
   });
 }
 

@@ -1,6 +1,6 @@
 angular
-  .module('nuschools')
-  .controller('UsersController', UsersController);
+.module('nuschools')
+.controller('UsersController', UsersController);
 
 UsersController.$inject = ['User', 'CurrentUser', '$state'];
 function UsersController(User, CurrentUser, $state){
@@ -26,23 +26,23 @@ function UsersController(User, CurrentUser, $state){
   function handleLogin(res) {
     var token = res.token ? res.token : null
     if (token) {
-          self.getUsers();
-          $state.go('home');
-        }
-        self.currentUser = CurrentUser.getUser();
-    } 
+      self.getUsers();
+      $state.go('home');
+    }
+    self.currentUser = CurrentUser.getUser();
+  } 
 
   function handleError(e) {
     self.error = "Something went wrong.";
   }
 
-   function register() {
-       User.register(self.user, handleLogin, handleError);
-   }
+  function register() {
+    User.register(self.user, handleLogin, handleError);
+  }
 
-   function login() {
-       User.login(self.user, handleLogin, handleError);
-   }
+  function login() {
+    User.login(self.user, handleLogin, handleError);
+  }
 
   function logout() {
     self.all         = [];
@@ -56,6 +56,7 @@ function UsersController(User, CurrentUser, $state){
   }
 
   if (checkLoggedIn()) {
+    console.log("Logged in....")
     self.getUsers();
   }
 

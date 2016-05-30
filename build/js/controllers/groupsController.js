@@ -12,7 +12,6 @@ function GroupsController(Group, $state){
   self.createGroup    = createGroup;
 
   function getGroups() {
-    console.log("0");
     Group.query(function(data){
       self.all = data.groups;
       console.log(data);
@@ -20,10 +19,15 @@ function GroupsController(Group, $state){
   }
 
   function createGroup(){
-    Group.save(function(data) {
-      group.push(group);
-      self.all = [];
+    Group.save(self.group).$promise.then(function(data) {
+      console.log(data);
+      self.all.push(data.group);
+      self.group = null;
     });
   }
+
+  // Should only call when you are logged in
+  getGroups();
+
   return self;
 }

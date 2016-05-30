@@ -48743,7 +48743,6 @@ function GroupsController(Group, $state){
   self.createGroup    = createGroup;
 
   function getGroups() {
-    console.log("0");
     Group.query(function(data){
       self.all = data.groups;
       console.log(data);
@@ -48751,17 +48750,22 @@ function GroupsController(Group, $state){
   }
 
   function createGroup(){
-    Group.save(function(data) {
-      group.push(group);
-      self.all = [];
+    Group.save(self.group).$promise.then(function(data) {
+      console.log(data);
+      self.all.push(data.group);
+      self.group = null;
     });
   }
+
+  // Should only call when you are logged in
+  getGroups();
+
   return self;
 }
 
 angular
-  .module('nuschools')
-  .controller('UsersController', UsersController);
+.module('nuschools')
+.controller('UsersController', UsersController);
 
 UsersController.$inject = ['User', 'CurrentUser', '$state'];
 function UsersController(User, CurrentUser, $state){
@@ -48787,23 +48791,23 @@ function UsersController(User, CurrentUser, $state){
   function handleLogin(res) {
     var token = res.token ? res.token : null
     if (token) {
-          self.getUsers();
-          $state.go('home');
-        }
-        self.currentUser = CurrentUser.getUser();
-    } 
+      self.getUsers();
+      $state.go('home');
+    }
+    self.currentUser = CurrentUser.getUser();
+  } 
 
   function handleError(e) {
     self.error = "Something went wrong.";
   }
 
-   function register() {
-       User.register(self.user, handleLogin, handleError);
-   }
+  function register() {
+    User.register(self.user, handleLogin, handleError);
+  }
 
-   function login() {
-       User.login(self.user, handleLogin, handleError);
-   }
+  function login() {
+    User.login(self.user, handleLogin, handleError);
+  }
 
   function logout() {
     self.all         = [];
@@ -48817,6 +48821,7 @@ function UsersController(User, CurrentUser, $state){
   }
 
   if (checkLoggedIn()) {
+    console.log("Logged in....")
     self.getUsers();
   }
 
