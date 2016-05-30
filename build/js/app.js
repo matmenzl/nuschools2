@@ -11,23 +11,23 @@ function MainRouter($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: "/",
-      templateUrl: "./js/views/home.html"
+      templateUrl: "../views/home.html"
     })
     .state('login', {
       url: "/login",
-      templateUrl: "./js/views/authentications/login.html"
+      templateUrl: "../views/authentications/login.html"
     })
     .state('register', {
       url: "/register",
-      templateUrl: "./js/views/authentications/register.html"
+      templateUrl: "../views/authentications/register.html"
     })
     .state('users', {
       url: "/users",
-      templateUrl: "./js/views/users/index.html"
+      templateUrl: "../views/users/index.html"
     })
     .state('user', {
       url: "/users/:id",
-      templateUrl: "./js/views/users/show.html",
+      templateUrl: "../views/users/show.html",
       controller: function($scope, $stateParams, User) {
         User.get({ id: $stateParams.id }, function(res){
           $scope.$parent.users.user = res.user;
@@ -36,11 +36,11 @@ function MainRouter($stateProvider, $urlRouterProvider) {
     })
     .state('groups', {
       url: "/groups",
-      templateUrl: "./js/views/groups/index.html"
+      templateUrl: "../views/groups/index.html"
     })
     .state('group', {
-      url: "/groups/;id",
-      templateUrl: "./js/views/groups/show.html",
+      url: "/groups/:id",
+      templateUrl: "../views/groups/show.html",
       controller: function($scope, $stateParams, Group) {
         Group.get({ id: $stateParams.id}, function(res){
           $scope.$parent.groups.group = res.group;
