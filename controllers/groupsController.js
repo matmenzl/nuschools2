@@ -15,7 +15,7 @@ function groupsIndex(req, res) {
   // Find all groups
   Group
   .find()
-  .populate(["owner", "teacher"])
+  .populate(["owner", "teacher", "students"])
   .exec(function(err, groups){
     if (err) return res.status(404).json({message: 'Something went wrong.'});
     return res.status(200).json({ groups: groups });
@@ -52,8 +52,8 @@ function groupsUpdate(req, res){
     if (err) return res.status(500).json({message: "Something went wrong!"});
     if (!user) return res.status(404).json({message: 'No group found.'});
 
-    if (req.body.email) user.local.email = req.body.name;
-    if (req.body.password) user.local.password = req.body.password;
+    if (req.body.email) user.email = req.body.name;
+    if (req.body.password) user.password = req.body.password;
 
     group.save(function(err) {
      if (err) return res.status(500).json({message: "Something went wrong!"});

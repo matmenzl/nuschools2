@@ -7,6 +7,7 @@ function UsersShowController(User, $stateParams){
 
   var self = this;
 
+
   function getUser() {
     User.get($stateParams, function(data){
       self.user = data.user;
@@ -16,4 +17,6 @@ function UsersShowController(User, $stateParams){
   getUser();
   
   return self;
+
+
 }

@@ -10,6 +10,8 @@ function GroupsIndexController(Group, $state, Request){
   self.all            = [];
   self.getGroups      = getGroups;
   self.requestToTeach = requestToTeach;
+  self.requestToStudy = requestToStudy;
+
 
   function getGroups() {
     Group.query(function(data){
@@ -22,6 +24,13 @@ function GroupsIndexController(Group, $state, Request){
       console.log(data);
     })
   }
+
+  function requestToStudy(group_id, owner_id){
+    Request.save({ group: group_id, owner: owner_id}).$promise.then(function(data){
+      console.log(data);
+    })
+  }
+
 
   // Should only call when you are logged in
   getGroups();

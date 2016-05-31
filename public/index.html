@@ -41,7 +41,7 @@
               <a ui-sref="requestsIndex">Requests</a>
             </li>
             <li ng-hide="users.checkLoggedIn()">
-              <a ui-sref="login">Login</a>
+              <a ui-sref="login">Login</a><span ng-show="users.checkLoggedIn()">{{ users.user.username }}</span>
             </li>
             <li ng-hide="users.checkLoggedIn()">
               <a ui-sref="register">Register</a>

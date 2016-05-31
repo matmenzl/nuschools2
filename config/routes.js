@@ -33,8 +33,10 @@ router.route('/groups/:id')
 router.route("/requests")
   .get(requestsController.requestsIndex)
   .post(requestsController.requestsCreate);
+
 router.route("/requests/:id/accept")
   .post(requestsController.requestsAccept) 
+  
 router.route("/requests/:id/reject")
   .post(requestsController.requestsAccept) 
 

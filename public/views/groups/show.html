@@ -1,10 +1,7 @@
 <!-- If visitor: -->
-
 <div class="row">
   <h2>{{ groups.group.title | uppercase }}</h2>
-  <!-- TO DO Group Owner -->
   <h3>{{ groups.group.teacher.username }}</h2>
-  <!-- TO DO Number of Students -->
   <img ng-src="{{ groups.group.image }}">
   <p>{{ groups.group.description }}</p>
 </div>
@@ -16,26 +13,18 @@
   </li>
   <!-- TO DO if open places for students -->
   <li>
-    <button class="btn btn-default">Join</button>
+    <button class="btn btn-default" ng-click="groups.requestToStudy(group._id, group.owner._id)">Join</button>
   </li>
   <li>
     <button ui-sref="groupsShow({ id: group._id })" class="btn btn-default">More Info</button>
   </li>
+  <li ng-show="group.owner">
+    <button type="button" data-ng-click="group.deleteGroup()">Delete</button>
+  </li>
 </ul>
 
 
-
-
 <!-- If owner: -->
-
-<div class="row">
-  <h2>{{ groups.group.title | uppercase }}</h2>
-  <!-- Group Owner -->
-  <h3>{{ groups.group.teacher.username }}</h2>
-  <!-- Number of Students -->
-  <img ng-src="{{ groups.group.image }}">
-  <p>{{ groups.group.description }}</p>
-</div>
 
 <!-- links to Request-Page
 Open Teacher Requests Button -> goes to Request-Page
