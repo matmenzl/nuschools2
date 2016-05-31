@@ -48693,8 +48693,9 @@ angular
   .module('nuschools')
   .config(MainRouter);
 
-MainRouter.$inject = ['$stateProvider', '$urlRouterProvider'];
-function MainRouter($stateProvider, $urlRouterProvider) {
+MainRouter.$inject = ['$stateProvider', "$locationProvider", '$urlRouterProvider'];
+function MainRouter($stateProvider, $locationProvider, $urlRouterProvider) {
+  $locationProvider.html5Mode(true)
   $stateProvider
     .state('home', {
       url: "/",
