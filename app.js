@@ -65,6 +65,7 @@ function assignUser(req, res, next) {
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
     payload = req.headers.authorization.split(' ')[1];
   }
+  
   var decodedUser = jwt.verify(payload, secret)
 
   if (decodedUser._doc) {
