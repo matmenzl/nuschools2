@@ -24,11 +24,11 @@ function groupsIndex(req, res) {
 
 function groupsCreate(req, res) {
   var group   = new Group(req.body);
-  group.owner = req.user._id;
+  group.owner = req.currentUser._id;
 
   // If you have selected to teach this class, you will be assigned as the teacher
   if (req.body.teach) {
-    group.teacher = req.user._id;
+    group.teacher = req.currentUser._id;
   } 
 
   group.save(function(err, group) {

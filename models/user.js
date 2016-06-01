@@ -6,7 +6,7 @@ var userSchema = mongoose.Schema({
   firstname: { type: String },
   lastname: { type: String },
   teacher: { type: Boolean },
-  zip: { type: Number },
+  zip: { type: String },
   city: { type: String },
   image: { type: String },
   email: { type: String, unique: true, required: true },
@@ -23,5 +23,13 @@ userSchema.statics.encrypt = function(password) {
 userSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 }
+
+userSchema.options.toJSON = {
+  transform: function(doc, ret, options) {
+    delete ret.password;
+    delete ret.__v;
+    return ret;
+  }
+};
 
 module.exports = mongoose.model("User", userSchema);

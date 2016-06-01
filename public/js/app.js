@@ -48808,22 +48808,20 @@ angular
   .module('nuschools')
   .controller('GroupsShowController', GroupsShowController);
 
-GroupsShowController.$inject = ['Group', '$stateParams'];
-function GroupsShowController(Group, $stateParams){
+GroupsShowController.$inject = ['Group', '$stateParams', '$state'];
+function GroupsShowController(Group, $stateParams, $state){
 
-  var self    = this;
+  var self         = this;
+  self.deleteGroup = deleteGroup;
 
   Group.get($stateParams, function(data){
     self.group = data.group;
   });
 
   function deleteGroup(group) {
-     self.group = Group.get($stateParams);
-     self.delete = function(){
-     Group.remove($stateParams, function(){
-     $state.go("groupsIndex")
-     });
-    }
+    Group.remove($stateParams, function(){
+      $state.go("groupsIndex")
+    });
   }
 
 
