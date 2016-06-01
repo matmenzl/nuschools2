@@ -8,9 +8,7 @@ function MainRouter($stateProvider, $locationProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: "/",
-      templateUrl: "../views/home.html",
-      controller: "GroupsIndexController",
-      controllerAs: "groups"
+      templateUrl: "../views/home.html"
     })
     .state('login', {
       url: "/login",

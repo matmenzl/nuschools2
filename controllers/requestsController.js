@@ -56,7 +56,18 @@ function requestsAccept(req, res, next){
 }
 
 function requestsReject(req, res, next){
-  
+  Group.findOne({
+    "requests._id": req.params.id,
+    owner: req.currentUser._id,
+  }, function(err, group) {
+    if (err) return res.status(500).json({message: 'Something went wrong.'});
+    var request = group.requests.id(req.params.id);
+    request.status = "rejected";
+    group.save(function(err, group){
+      if (err) return res.status(500).json({message: 'Something went wrong.'});
+      return res.status(201).json({message: "Request rejected"});
+    })
+  });
 }
 
 module.exports = {

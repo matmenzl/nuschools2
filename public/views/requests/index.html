@@ -15,7 +15,7 @@
           <h4 class="media-heading">({{ request.type }}) Request from {{ request.sender.username }}</h4>
           <h4>Teaching: {{ group.title }}</h4>
           <button ng-click="requests.accept(request)">Accept</button>
-          <button>Reject</button>
+          <button ng-click="requests.reject(request)">Reject</button>
         </div>
       </li>
     </ul>
