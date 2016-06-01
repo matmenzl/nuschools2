@@ -18,7 +18,6 @@ function GroupsShowController(Group, $stateParams, $state){
     });
   }
 
-
   function updateGroup(group) {
    if (self.group._id) {
       Group.update({ id: self.group._id }, { user: self.group }, function(){

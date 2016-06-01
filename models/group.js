@@ -13,6 +13,16 @@ var groupSchema = mongoose.Schema({
   timestamps: true
 });
 
+groupSchema.pre('remove', function(next){
+  console.log("REMOVE");
+  mongoose.model("Request").find({ group: this._id }, function(err, requests){
+    requests.forEach(function(request){
+      request.remove();
+    });
+    next();
+  })
+});
+
 module.exports = mongoose.model("Group", groupSchema);
 
 

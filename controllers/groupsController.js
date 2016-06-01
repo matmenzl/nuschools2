@@ -64,9 +64,12 @@ function groupsUpdate(req, res){
 }
 
 function groupsDelete(req, res){
-  Group.findByIdAndRemove({_id: req.params.id}, function(err){
-   if (err) return res.status(404).json({message: 'Something went wrong.'});
-   res.status(200).json({message: 'Group has been successfully deleted'});
+  Group.findById({_id: req.params.id}, function(err, group){
+    if (err) return res.status(404).json({message: 'Something went wrong.'});
+    group.remove(function(err, group){
+      if (err) return res.status(404).json({message: 'Something went wrong.'});
+      res.status(200).json({message: 'Group has been successfully deleted'});
+    })
   });
 }
 

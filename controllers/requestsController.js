@@ -1,7 +1,6 @@
 var Request = require("../models/request");
 
 function requestsIndex(req, res, next){
-  console.log(req.currentUser._id)
   Request 
   .find({ owner: req.currentUser._id })
   .populate(["teacher", "group", "students"])
@@ -17,12 +16,19 @@ function requestsIndex(req, res, next){
  * owner: owner._id
  */
 function requestsCreate(req, res, next){
-  var request = new Request(req.body)
-  request.teacher = req.currentUser._id;
-
-  request.save(function(err, request){
+  Request.find({
+    teacher: req.currentUser._id,
+    group: req.body.group
+  }, function(err, requests){
     if (err) return res.status(500).json({message: 'Something went wrong.'});
-    return res.status(201).json({request: request});
+    if (requests.length > 0) return res.status(201).json({message: 'There is already a pending request.'});
+    var request = new Request(req.body)
+    request.teacher = req.currentUser._id;
+
+    request.save(function(err, request){
+      if (err) return res.status(500).json({message: 'Something went wrong.'});
+      return res.status(201).json({request: request});
+    })
   })
 }
 
