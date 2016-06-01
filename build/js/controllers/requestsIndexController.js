@@ -5,19 +5,18 @@ angular
 RequestsIndexController.$inject = ['Request'];
 function RequestsIndexController(Request){
 
-  var self          = this;
+  var self    = this;
+  self.accept = accept;
 
-  self.all          = [];
-  self.getRequests  = getRequests;
+  Request.query(function(data){
+    self.all = data.groups;
+  });
 
-  function getRequests() {
-    Request.query(function(data){
-      self.all = data.requests;
-    });
+  function accept(request){
+    Request.accept({id: request._id, type: request.type }, function(data){
+      console.log(data)
+    })
   }
-
-  // Should only call when you are logged in
-  getRequests();
 
   return self;
 }

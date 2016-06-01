@@ -14,11 +14,11 @@ function Request($resource, API){
       'remove':    { method: 'DELETE' },
       'delete':    { method: 'DELETE' },
       'accept': {
-        url: API + '/request/:id/accept',
+        url: API + '/requests/:id/accept',
         method: "POST"
       },
       'reject':      {
-        url: API +  '/request/:id/reject',
+        url: API +  '/requests/:id/reject',
         method: "POST"
       }
     });

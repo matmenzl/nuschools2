@@ -48761,21 +48761,14 @@ function GroupsIndexController(Group, $state, Request){
   var self = this;
 
   self.all            = [];
-  self.requestToTeach = requestToTeach;
-  self.requestToStudy = requestToStudy;
+  self.sendRequest    = sendRequest;
 
   Group.query(function(data){
     self.all = data.groups;
   });
 
-  function requestToTeach(group_id, owner_id){
-    Request.save({ group: group_id, owner: owner_id}).$promise.then(function(data){
-      console.log(data);
-    })
-  }
-
-  function requestToStudy(group_id, owner_id){
-    Request.save({ group: group_id, owner: owner_id}).$promise.then(function(data){
+  function sendRequest(group_id, type){
+    Request.save({ group_id: group_id, type: type}).$promise.then(function(data){
       console.log(data);
     })
   }
@@ -48822,7 +48815,6 @@ function GroupsShowController(Group, $stateParams, $state){
     });
   }
 
-
   function updateGroup(group) {
    if (self.group._id) {
       Group.update({ id: self.group._id }, { user: self.group }, function(){
@@ -48842,19 +48834,18 @@ angular
 RequestsIndexController.$inject = ['Request'];
 function RequestsIndexController(Request){
 
-  var self          = this;
+  var self    = this;
+  self.accept = accept;
 
-  self.all          = [];
-  self.getRequests  = getRequests;
+  Request.query(function(data){
+    self.all = data.groups;
+  });
 
-  function getRequests() {
-    Request.query(function(data){
-      self.all = data.requests;
-    });
+  function accept(request){
+    Request.accept({id: request._id, type: request.type }, function(data){
+      console.log(data)
+    })
   }
-
-  // Should only call when you are logged in
-  getRequests();
 
   return self;
 }
@@ -48988,11 +48979,11 @@ function Request($resource, API){
       'remove':    { method: 'DELETE' },
       'delete':    { method: 'DELETE' },
       'accept': {
-        url: API + '/request/:id/accept',
+        url: API + '/requests/:id/accept',
         method: "POST"
       },
       'reject':      {
-        url: API +  '/request/:id/reject',
+        url: API +  '/requests/:id/reject',
         method: "POST"
       }
     });

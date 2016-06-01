@@ -23,15 +23,19 @@
   </li>
 </ul>
 
-
-<!-- If owner of the group: -->
-
-<!-- links to Request-Page
-Open Teacher Requests Button -> goes to Request-Page
-Open Students Request Button -> goes to Request Page
--->
-
-
+<ul class="media-list">
+  <li class="media" ng-repeat="user in groups.group.students">
+    <div class="media-left">
+      <a ui-sref="usersShow({ id: user._id })">
+        <img class="media-object" ng-src="{{ user.image }}">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{ user.username }}</h4>
+      <p>{{ user.email }}</p>
+    </div>
+  </li>
+</ul>
 
 
 

@@ -2,17 +2,22 @@
 
 <h2>Requests</h2>
 <ul class="media-list">
-  <li class="media" ng-repeat="request in requests.all">
-    <div class="media-left">
-      <a ui-sref="user({ id: user._id })">
-        <img class="media-object" ng-src="{{ request.teacher.image }}">
-      </a>
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading">Request from {{ request.teacher.username }}</h4>
-      <h4>Teaching: {{ request.group.title }}</h4>
-      <button>Accept</button>
-      <button>Reject</button>
-    </div>
+  <li ng-repeat="group in requests.all">
+    <ul>
+      <li class="media" ng-repeat="request in group.requests | filter: { status: 'pending' }">
+        <div class="media-left">
+          <a ui-sref="user({ id: user._id })">
+            <img class="media-object" ng-src="{{ request.sender.image }}">
+          </a>
+        </div>
+        {{ request.status }}
+        <div class="media-body">
+          <h4 class="media-heading">({{ request.type }}) Request from {{ request.sender.username }}</h4>
+          <h4>Teaching: {{ group.title }}</h4>
+          <button ng-click="requests.accept(request)">Accept</button>
+          <button>Reject</button>
+        </div>
+      </li>
+    </ul>
   </li>
 </ul>

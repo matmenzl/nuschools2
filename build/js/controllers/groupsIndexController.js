@@ -8,21 +8,14 @@ function GroupsIndexController(Group, $state, Request){
   var self = this;
 
   self.all            = [];
-  self.requestToTeach = requestToTeach;
-  self.requestToStudy = requestToStudy;
+  self.sendRequest    = sendRequest;
 
   Group.query(function(data){
     self.all = data.groups;
   });
 
-  function requestToTeach(group_id, owner_id){
-    Request.save({ group: group_id, owner: owner_id}).$promise.then(function(data){
-      console.log(data);
-    })
-  }
-
-  function requestToStudy(group_id, owner_id){
-    Request.save({ group: group_id, owner: owner_id}).$promise.then(function(data){
+  function sendRequest(group_id, type){
+    Request.save({ group_id: group_id, type: type}).$promise.then(function(data){
       console.log(data);
     })
   }
