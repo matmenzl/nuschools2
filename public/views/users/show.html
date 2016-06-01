@@ -1,10 +1,13 @@
 <div class="row">
+
   <h2>{{ users.user.username | uppercase }}</h2>
   <img ng-src="{{ users.user.image }}">
   <p>{{ users.user.email }}</p>
   <p>{{ users.user.city }}</p>
+
+
   <!--   edit user -->
-  <li ng-show="users.user">
+  <li ng-show="users.currentUser">
    <form ng-submit="users.updateUser(users.user)">
      <input ng-model="users.user.username" type="text" name='name' id="name" placeholder="Name">
      <input ng-model="users.user.image" type="text" name='image' id="image" placeholder="Image">
@@ -12,15 +15,22 @@
    </form>
   </li>
 
-  <p> Student in</h4>
-  <p> Teacher in</h4>
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#">Student In</a></li>
+    <!-- list of groups this users is a student of -->
+
+    <li role="presentation"><a href="#">Teacher In</a></li>
+    <!-- list of groups this users is a teacher of -->
+
+  </ul>
+
 
   <li class="media" ng-repeat="group in groups.all">
   <!--   Show only groups created by this user -->
   </li>
 
-  <li ng-show="users.user">
-    <button type="button" ng-click="users.deleteUser({id: user._id})" class="btn btn-danger">Delete</button>
+  <li ng-show="users.currentUser">
+    <button type="button" ng-click="users.deleteUser({id: user._id})" class="btn btn-danger">Delete User Profile</button>
   </li>
 
 </div>

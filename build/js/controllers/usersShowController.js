@@ -5,34 +5,25 @@ angular
 UsersShowController.$inject = ['User', '$stateParams'];
 function UsersShowController(User, $stateParams){
 
-  var self = this;
-  self.user = user; 
+  var self   = this;
 
+  User.get($stateParams, function(data){
+    self.user = data.user;
+  });
 
-  function getUser() {
-    User.get($stateParams, function(data){
-      self.user = data.user;
-    });
+  function deleteUser(user){
+    User.delete({id: user._id});
+    var index = self.users.indexOf(user);
+    self.users.splice(index, 1);
   }
 
-  getUser();
-  
-  return self;
-
-  function deleteUser() {
-     self.user = User.get($stateParams);
-     self.delete = function(){
-     User.remove($stateParams, function(){
-     $state.go("usersIndex")
-     });
-    }
-  }
-
-  function updateUser() {
+  function updateUser(user) {
    if (self.user._id) {
       User.update({ id: self.user._id }, { user: self.user }, function(){
       self.user = {};
       });
     }
   }
+
+  return self;
 }

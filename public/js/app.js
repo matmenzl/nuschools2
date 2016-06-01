@@ -48677,10 +48677,7 @@ angular.module('ui.router.state')
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
 angular
-  .module('nuschools', ['ngResource', 'angular-jwt', 'ui.router'])
-  .config(function($httpProvider) {
-      $httpProvider.interceptors.push('authInterceptor');
-    });
+  .module('nuschools', ['ngResource', 'angular-jwt', 'ui.router']);
 angular
   .module('nuschools')
   .config(Interceptor);
@@ -48695,7 +48692,7 @@ angular
 
 MainRouter.$inject = ['$stateProvider', "$locationProvider", '$urlRouterProvider'];
 function MainRouter($stateProvider, $locationProvider, $urlRouterProvider) {
-  $locationProvider.html5Mode(true)
+  // $locationProvider.html5Mode(true)
   $stateProvider
     .state('home', {
       url: "/",
@@ -48764,16 +48761,12 @@ function GroupsIndexController(Group, $state, Request){
   var self = this;
 
   self.all            = [];
-  self.getGroups      = getGroups;
   self.requestToTeach = requestToTeach;
   self.requestToStudy = requestToStudy;
 
-
-  function getGroups() {
-    Group.query(function(data){
-      self.all = data.groups;
-    });
-  }
+  Group.query(function(data){
+    self.all = data.groups;
+  });
 
   function requestToTeach(group_id, owner_id){
     Request.save({ group: group_id, owner: owner_id}).$promise.then(function(data){
@@ -48786,10 +48779,6 @@ function GroupsIndexController(Group, $state, Request){
       console.log(data);
     })
   }
-
-
-  // Should only call when you are logged in
-  getGroups();
 
   return self;
 }
@@ -48822,19 +48811,13 @@ angular
 GroupsShowController.$inject = ['Group', '$stateParams'];
 function GroupsShowController(Group, $stateParams){
 
-  var self = this;
+  var self    = this;
 
-  function getGroup() {
-    Group.get($stateParams, function(data){
-      self.group = data.group;
-    });
-  }
+  Group.get($stateParams, function(data){
+    self.group = data.group;
+  });
 
-  getGroup();
-
-  return self;
-
-  function deleteGroup() {
+  function deleteGroup(group) {
      self.group = Group.get($stateParams);
      self.delete = function(){
      Group.remove($stateParams, function(){
@@ -48842,6 +48825,17 @@ function GroupsShowController(Group, $stateParams){
      });
     }
   }
+
+
+  function updateGroup(group) {
+   if (self.group._id) {
+      Group.update({ id: self.group._id }, { user: self.group }, function(){
+      self.group = {};
+      });
+    }
+  }
+
+  return self;
 
 }
 
@@ -48941,36 +48935,27 @@ angular
 UsersShowController.$inject = ['User', '$stateParams'];
 function UsersShowController(User, $stateParams){
 
-  var self = this;
-  self.user = user; 
+  var self   = this;
 
+  User.get($stateParams, function(data){
+    self.user = data.user;
+  });
 
-  function getUser() {
-    User.get($stateParams, function(data){
-      self.user = data.user;
-    });
+  function deleteUser(user){
+    User.delete({id: user._id});
+    var index = self.users.indexOf(user);
+    self.users.splice(index, 1);
   }
 
-  getUser();
-  
-  return self;
-
-  function deleteUser() {
-     self.user = User.get($stateParams);
-     self.delete = function(){
-     User.remove($stateParams, function(){
-     $state.go("usersIndex")
-     });
-    }
-  }
-
-  function updateUser() {
+  function updateUser(user) {
    if (self.user._id) {
       User.update({ id: self.user._id }, { user: self.user }, function(){
       self.user = {};
       });
     }
   }
+
+  return self;
 }
 
 angular
@@ -49053,7 +49038,6 @@ function AuthInterceptor(API, TokenService) {
   return {
     request: function(config) {
       var token = TokenService.getToken();
-      console.log(token);
 
       if (config.url.indexOf(API) === 0 && token) {
         config.headers.Authorization = 'Bearer ' + token;

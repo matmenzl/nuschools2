@@ -5,19 +5,13 @@ angular
 GroupsShowController.$inject = ['Group', '$stateParams'];
 function GroupsShowController(Group, $stateParams){
 
-  var self = this;
+  var self    = this;
 
-  function getGroup() {
-    Group.get($stateParams, function(data){
-      self.group = data.group;
-    });
-  }
+  Group.get($stateParams, function(data){
+    self.group = data.group;
+  });
 
-  getGroup();
-
-  return self;
-
-  function deleteGroup() {
+  function deleteGroup(group) {
      self.group = Group.get($stateParams);
      self.delete = function(){
      Group.remove($stateParams, function(){
@@ -25,5 +19,16 @@ function GroupsShowController(Group, $stateParams){
      });
     }
   }
+
+
+  function updateGroup(group) {
+   if (self.group._id) {
+      Group.update({ id: self.group._id }, { user: self.group }, function(){
+      self.group = {};
+      });
+    }
+  }
+
+  return self;
 
 }

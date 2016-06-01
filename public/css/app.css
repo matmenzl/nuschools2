@@ -7967,6 +7967,10 @@ grey: #42546C
   border: none;
 }
 
+html {
+  border-top: 8px solid #70EAAA;
+}
+
 #home-claim {
   height: 200px;
   width: 100%;

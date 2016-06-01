@@ -1,7 +1,11 @@
 $primary-color: #C6424F;
 $button-color: #335DC3;
 $font-color: #42546C;
+$green: #70EAAA;
 
+html {
+  border-top: 8px solid $green;
+}
 
 #home-claim {
   height: 200px;
@@ -16,6 +20,7 @@ $font-color: #42546C;
 #home-button {
   height: 50px;
   width: 100%;
+
   button.btn.btn-default.home {
     background-color:#fff;
     border-top: 2px solid $button-color;
@@ -31,6 +36,7 @@ $font-color: #42546C;
     background-color: $button-color;
     border-color: $button-color;
   }
+
 }
 
 
