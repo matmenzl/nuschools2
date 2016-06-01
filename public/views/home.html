@@ -4,8 +4,14 @@
 </div>
 
 <div id="home-button">
-  <li>
-    <button class="btn btn-default home">Create a Group</button>
+  <li ng-show="users.checkLoggedIn()">
+    <a ui-sref="groupsNew"><button class="btn btn-default home">Create a Group</button></a>
+  </li>
+  <li ng-hide="users.checkLoggedIn()">
+    <a ui-sref="login"><button class="btn btn-default home">Login</button></a>
+  </li>
+  <li ng-hide="users.checkLoggedIn()">
+    <a ui-sref="register"><button class="btn btn-default home">Register</button></a>
   </li>
 </div>
 
