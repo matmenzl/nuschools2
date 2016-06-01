@@ -7944,6 +7944,45 @@ button.close {
 }
 
 /*# sourceMappingURL=bootstrap.css.map */
-.navbar {
-  background-color: lightblue;
+/*
+red: #C6424F
+dark-blue: #335DC3
+light-blue: #AFD0EF
+grey: #42546C
+*/
+.navbar-default {
+  background-color: white;
 }
+
+.navbar-default .navbar-brand {
+  color: #C6424F;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #C6424F;
+}
+
+.navbar {
+  border: none;
+}
+
+.form-control {
+  border: 0;
+  border-bottom: 2px solid #000;
+  border-radius: 0px;
+}
+
+.btn-default {
+  background-color: #fff;
+  border-top: 2px solid #000;
+  border-right: 4px solid #000;
+  border-bottom: 4px solid #000;
+  border-left: 2px solid #000;
+}
+
+/*
+font main color: red: #C6424F
+dark-blue: #335DC3
+button call to action color: light-blue: #AFD0EF
+grey: #42546C
+*/

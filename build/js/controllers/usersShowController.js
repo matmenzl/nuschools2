@@ -6,6 +6,7 @@ UsersShowController.$inject = ['User', '$stateParams'];
 function UsersShowController(User, $stateParams){
 
   var self = this;
+  self.user = user; 
 
 
   function getUser() {
@@ -27,4 +28,11 @@ function UsersShowController(User, $stateParams){
     }
   }
 
+  function updateUser() {
+   if (self.user._id) {
+      User.update({ id: self.user._id }, { user: self.user }, function(){
+      self.user = {};
+      });
+    }
+  }
 }

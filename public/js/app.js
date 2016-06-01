@@ -48699,7 +48699,9 @@ function MainRouter($stateProvider, $locationProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: "/",
-      templateUrl: "../views/home.html"
+      templateUrl: "../views/home.html",
+      controller: "GroupsIndexController",
+      controllerAs: "groups"
     })
     .state('login', {
       url: "/login",
@@ -48711,7 +48713,9 @@ function MainRouter($stateProvider, $locationProvider, $urlRouterProvider) {
     })
     .state('usersIndex', {
       url: "/users",
-      templateUrl: "../views/users/index.html"
+      templateUrl: "../views/users/index.html",
+      controller: "UsersIndexController",
+      controllerAs: "users"
     })
     .state('usersShow', {
       url: "/users/:id",
@@ -48866,52 +48870,6 @@ function RequestsIndexController(Request){
 }
 
 angular
-  .module('nuschools')
-  .controller('StudentsShowController', StudentsShowController);
-
-StudentsShowController.$inject = ['Group', 'Students', '$stateParams'];
-function StudentsShowController(Group, 'Students', $stateParams){
-
-  var self        = this;
-  var getGroup    = getGroup;
-  var getStudents = getStudents;
-
-  function getStudents() {
-    Group.get($stateParams, function(data){
-      self.group = data.group;
-      //get the students within a group...
-    });
-  }
-
-  getStudents();
-
-  return self;
-
-}
-angular
-  .module('nuschools')
-  .controller('TeachersShowController', TeachersShowController);
-
-TeachersShowController.$inject = ['Group', 'Teachers', '$stateParams'];
-function TeachersShowController(Group, 'Teachers', $stateParams){
-
-  var self        = this;
-  var getGroup    = getGroup;
-  var getTeachers = getTeachers;
-
-  function getTeachers() {
-    Group.get($stateParams, function(data){
-      self.group = data.group;
-      // get the teachers within a group...
-    });
-  }
-
-  getGroup();
-
-  return self;
-
-}
-angular
 .module('nuschools')
 .controller('UsersIndexController', UsersIndexController);
 
@@ -48984,6 +48942,7 @@ UsersShowController.$inject = ['User', '$stateParams'];
 function UsersShowController(User, $stateParams){
 
   var self = this;
+  self.user = user; 
 
 
   function getUser() {
@@ -49005,6 +48964,13 @@ function UsersShowController(User, $stateParams){
     }
   }
 
+  function updateUser() {
+   if (self.user._id) {
+      User.update({ id: self.user._id }, { user: self.user }, function(){
+      self.user = {};
+      });
+    }
+  }
 }
 
 angular
