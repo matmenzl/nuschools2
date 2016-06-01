@@ -7,7 +7,8 @@ html {
   border-top: 8px solid $green;
 }
 
-#home-claim {
+.jumbotron {
+  position: relative;
   height: 200px;
   width: 100%;
   background: url('/images/home.jpeg') no-repeat center center fixed; 
@@ -15,6 +16,9 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  h1, h2 {
+    color:white;
+    text-shadow: 2px 2px #000;  }
 }
 
 #home-button {

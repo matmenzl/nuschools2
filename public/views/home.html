@@ -1,6 +1,8 @@
+<div class="jumbotron">
 <div id="home-claim">
   <h1>Death to schools</h1>
   <h2>Learn in learning groups</h2>
+</div>
 </div>
 
 <div id="home-button">
@@ -19,10 +21,18 @@
   <li>
     <h4>Recently created learning groups</h4>
   </li>
-  <li>
-    <h2>{{ groups.group.title | uppercase }}</h2>
-  </li>
+    <div ng-controller="GroupsIndexController as group">
+      <li class="media" ng-repeat="group in groups.all">
+        <div class="media-left">
+          <a ui-sref="groupsShow({ id: group._id })">
+          <img class="media-object" ng-src="{{ group.image }}">
+          </a>
+        </div>
+        <div class="media-body">
+          <a ui-sref="groupsShow({ id: group._id })">
+          <h3 class="media-heading">{{ group.title }}</h3>
+          </a>
+        </div>
+      </li>
+    </div>
 </div>
-
-
-

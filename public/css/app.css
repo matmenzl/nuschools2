@@ -7971,7 +7971,8 @@ html {
   border-top: 8px solid #70EAAA;
 }
 
-#home-claim {
+.jumbotron {
+  position: relative;
   height: 200px;
   width: 100%;
   background: url("/images/home.jpeg") no-repeat center center fixed;
@@ -7979,6 +7980,11 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.jumbotron h1, .jumbotron h2 {
+  color: white;
+  text-shadow: 2px 2px #000;
 }
 
 #home-button {
@@ -8033,6 +8039,10 @@ html {
   color: #fff;
   background-color: #335DC3;
   border-color: #335DC3;
+}
+
+main.container {
+  width: 100%;
 }
 
 li {
