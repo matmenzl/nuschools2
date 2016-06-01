@@ -1,0 +1,45 @@
+$primary-color: #C6424F;
+$button-color: #335DC3;
+$font-color: #42546C;
+
+
+#home-claim {
+  height: 200px;
+  width: 100%;
+  background: url('./public/images/home.jpeg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#home-button {
+  height: 50px;
+  width: 100%;
+  button.btn.btn-default.home {
+    background-color:#fff;
+    border-top: 2px solid $button-color;
+    border-right: 4px solid $button-color;
+    border-bottom: 4px solid $button-color;
+    border-left: 2px solid $button-color;
+    color: $button-color;
+    margin-right: 5px;
+  }
+
+  button.btn.btn-default.home:hover {
+    color: #fff;
+    background-color: $button-color;
+    border-color: $button-color;
+  }
+}
+
+
+
+
+#home-overview {
+  height: 500px;
+  width: 100%;
+}
+
+
+

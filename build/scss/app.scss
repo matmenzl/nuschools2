@@ -4,15 +4,18 @@
 @import '_forms';
 @import '_buttons';
 
+$primary-color: #C6424F;
+$button-color: #335DC3;
+$font-color: #42546C;
 
+li {
+  list-style:none;
+}
 
-/*
-font main color: red: #C6424F
-dark-blue: #335DC3
-button call to action color: light-blue: #AFD0EF
-grey: #42546C
-*/
-
+.media-body {
+  width: 640px;
+  float:left; 
+}
 
 
 

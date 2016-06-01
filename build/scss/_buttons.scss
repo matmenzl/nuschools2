@@ -1,7 +1,19 @@
+$button-color: #335DC3;
+
 .btn-default {
   background-color:#fff;
-  border-top: 2px solid #000;
-  border-right: 4px solid #000;
-  border-bottom: 4px solid #000;
-  border-left: 2px solid #000;
+  border-top: 2px solid $button-color;
+  border-right: 4px solid $button-color;
+  border-bottom: 4px solid $button-color;
+  border-left: 2px solid $button-color;
+  float:left;
+  color: $button-color;
+  margin-right: 5px;
 }
+
+.btn-default:hover {
+  color: #fff;
+  background-color: $button-color;
+  border-color: $button-color;
+}
+

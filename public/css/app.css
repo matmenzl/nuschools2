@@ -7952,6 +7952,7 @@ grey: #42546C
 */
 .navbar-default {
   background-color: white;
+  font-weight: bold;
 }
 
 .navbar-default .navbar-brand {
@@ -7966,6 +7967,42 @@ grey: #42546C
   border: none;
 }
 
+#home-claim {
+  height: 200px;
+  width: 100%;
+  background: url("./public/images/home.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#home-button {
+  height: 50px;
+  width: 100%;
+}
+
+#home-button button.btn.btn-default.home {
+  background-color: #fff;
+  border-top: 2px solid #335DC3;
+  border-right: 4px solid #335DC3;
+  border-bottom: 4px solid #335DC3;
+  border-left: 2px solid #335DC3;
+  color: #335DC3;
+  margin-right: 5px;
+}
+
+#home-button button.btn.btn-default.home:hover {
+  color: #fff;
+  background-color: #335DC3;
+  border-color: #335DC3;
+}
+
+#home-overview {
+  height: 500px;
+  width: 100%;
+}
+
 .form-control {
   border: 0;
   border-bottom: 2px solid #000;
@@ -7974,15 +8011,26 @@ grey: #42546C
 
 .btn-default {
   background-color: #fff;
-  border-top: 2px solid #000;
-  border-right: 4px solid #000;
-  border-bottom: 4px solid #000;
-  border-left: 2px solid #000;
+  border-top: 2px solid #335DC3;
+  border-right: 4px solid #335DC3;
+  border-bottom: 4px solid #335DC3;
+  border-left: 2px solid #335DC3;
+  float: left;
+  color: #335DC3;
+  margin-right: 5px;
 }
 
-/*
-font main color: red: #C6424F
-dark-blue: #335DC3
-button call to action color: light-blue: #AFD0EF
-grey: #42546C
-*/
+.btn-default:hover {
+  color: #fff;
+  background-color: #335DC3;
+  border-color: #335DC3;
+}
+
+li {
+  list-style: none;
+}
+
+.media-body {
+  width: 640px;
+  float: left;
+}
