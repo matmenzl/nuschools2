@@ -12,8 +12,8 @@ function GroupsNewController(Group, $state, $stateParams){
     console.log("Submitted")
     Group.save(self.group).$promise.then(function(data) {
       console.log(data)
-      $state.go("groupsIndex");
     });
+    $state.go("groupsIndex");
   }
 
   return self;

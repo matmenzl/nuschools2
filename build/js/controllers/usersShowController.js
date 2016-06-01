@@ -18,5 +18,13 @@ function UsersShowController(User, $stateParams){
   
   return self;
 
+  function deleteUser() {
+     self.user = User.get($stateParams);
+     self.delete = function(){
+     User.remove($stateParams, function(){
+     $state.go("usersIndex")
+     });
+    }
+  }
 
 }

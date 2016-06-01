@@ -48804,8 +48804,8 @@ function GroupsNewController(Group, $state, $stateParams){
     console.log("Submitted")
     Group.save(self.group).$promise.then(function(data) {
       console.log(data)
-      $state.go("groupsIndex");
     });
+    $state.go("groupsIndex");
   }
 
   return self;
@@ -48830,16 +48830,14 @@ function GroupsShowController(Group, $stateParams){
 
   return self;
 
-
   function deleteGroup() {
      self.group = Group.get($stateParams);
      self.delete = function(){
      Group.remove($stateParams, function(){
      $state.go("groupsIndex")
      });
+    }
   }
-
-}
 
 }
 
@@ -48952,6 +48950,14 @@ function UsersShowController(User, $stateParams){
   
   return self;
 
+  function deleteUser() {
+     self.user = User.get($stateParams);
+     self.delete = function(){
+     User.remove($stateParams, function(){
+     $state.go("usersIndex")
+     });
+    }
+  }
 
 }
 

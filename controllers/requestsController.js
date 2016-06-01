@@ -26,7 +26,7 @@ function requestsCreate(req, res, next){
 }
 
 function requestsAccept(req, res, next){
-  
+
 }
 
 function requestsReject(req, res, next){

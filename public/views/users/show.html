@@ -4,5 +4,7 @@
   <p>{{ users.user.email }}</p>
   <p> Student in</h4>
   <p> Teacher in</h4>
-
+  <li ng-show="users.user">
+    <button type="button" data-ng-click="users.deleteUser()">Delete</button>
+  </li>
 </div>

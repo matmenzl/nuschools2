@@ -17,7 +17,6 @@ function GroupsShowController(Group, $stateParams){
 
   return self;
 
-
   function deleteGroup() {
      self.group = Group.get($stateParams);
      self.delete = function(){
