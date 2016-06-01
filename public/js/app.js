@@ -48866,6 +48866,52 @@ function RequestsIndexController(Request){
 }
 
 angular
+  .module('nuschools')
+  .controller('StudentsShowController', StudentsShowController);
+
+StudentsShowController.$inject = ['Group', 'Students', '$stateParams'];
+function StudentsShowController(Group, 'Students', $stateParams){
+
+  var self        = this;
+  var getGroup    = getGroup;
+  var getStudents = getStudents;
+
+  function getStudents() {
+    Group.get($stateParams, function(data){
+      self.group = data.group;
+      //get the students within a group...
+    });
+  }
+
+  getStudents();
+
+  return self;
+
+}
+angular
+  .module('nuschools')
+  .controller('TeachersShowController', TeachersShowController);
+
+TeachersShowController.$inject = ['Group', 'Teachers', '$stateParams'];
+function TeachersShowController(Group, 'Teachers', $stateParams){
+
+  var self        = this;
+  var getGroup    = getGroup;
+  var getTeachers = getTeachers;
+
+  function getTeachers() {
+    Group.get($stateParams, function(data){
+      self.group = data.group;
+      // get the teachers within a group...
+    });
+  }
+
+  getGroup();
+
+  return self;
+
+}
+angular
 .module('nuschools')
 .controller('UsersIndexController', UsersIndexController);
 

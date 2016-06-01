@@ -19,7 +19,7 @@
     <button ui-sref="groupsShow({ id: group._id })" class="btn btn-default">More Info</button>
   </li>
   <li ng-show="groups.group.owner">
-    <button type="button" data-ng-click="group.deleteGroup()">Delete</button>
+    <button type="button" ng-click="group.deleteGroup({id: group._id})" class="btn btn-danger">Delete</button>
   </li>
 </ul>
 

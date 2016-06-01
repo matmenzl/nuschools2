@@ -15,7 +15,7 @@ function groupsIndex(req, res) {
   // Find all groups
   Group
   .find()
-  .populate(["owner", "teacher", "students"])
+  .populate(["owner", "teacher"])
   .exec(function(err, groups){
     if (err) return res.status(404).json({message: 'Something went wrong.'});
     return res.status(200).json({ groups: groups });
@@ -40,7 +40,7 @@ function groupsCreate(req, res) {
 function groupsShow(req, res){
   Group
   .findById(req.params.id)
-  .populate(["owner", "teacher", "students"])
+  .populate(["owner", "teacher"])
   .exec(function(err, group){
     if (err) return res.status(404).json({message: 'Something went wrong.'});
     return res.status(200).json({ group: group });
