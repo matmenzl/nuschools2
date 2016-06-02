@@ -1,6 +1,9 @@
 <h2>Groups</h2>
+<!--   add filter -->
+<div ng-controller="GroupsIndexController">
+  <p>Search Groups<input type="text" ng-model="search"></p>
 <ul class="media-list">
-  <li class="media" ng-repeat="group in groups.all">
+  <li class="media" ng-repeat="group in groups.all | filter:search">
     <div class="media-left">
       <a ui-sref="groupsShow({ id: group._id })">
         <img class="media-object" ng-src="{{ group.image }}">
@@ -39,3 +42,5 @@
     </div>
   </li>
 </ul>
+
+
