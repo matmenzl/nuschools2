@@ -6,31 +6,33 @@
   <p>{{ users.user.city }}</p>
 
 
-  <!--   edit user -->
-  <li ng-show="users.currentUser">
-   <form ng-submit="users.updateUser(users.user)">
-     <input ng-model="users.user.username" type="text" name='name' id="name" placeholder="Name">
-     <input ng-model="users.user.image" type="text" name='image' id="image" placeholder="Image">
-     <input type="submit" value='Save' id="submit">
-   </form>
-  </li>
+  <h2>{{ users.user.username | uppercase }} is a Student in</h2>
+  <div ng-controller="RequestsIndexController as requests">
+    <div ng-controller="GroupsIndexController as groups">
+      <div ng-repeat="group in requests.all">
+        <div ng-repeat="request in group.requests | filter: { type: 'student' }">
+        <img class="group" ng-src="{{ group.image }}">
+        <h4>{{ group.title }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#">Student In</a></li>
-    <!-- list of groups this users is a student of -->
+  <h2>{{ users.user.username | uppercase }} is a Teacher in</h2>
+  <div ng-controller="RequestsIndexController as requests">
+    <div ng-controller="GroupsIndexController as groups">
+      <div ng-repeat="group in requests.all">
+        <div ng-repeat="request in group.requests | filter: { type: 'teacher' }">
+          <img {{ group.image }}</h4>
+          <h4>{{ group.title }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <li role="presentation"><a href="#">Teacher In</a></li>
-    <!-- list of groups this users is a teacher of -->
 
-  </ul>
-
-
-  <li class="media" ng-repeat="group in groups.all">
-  <!--   Show only groups created by this user -->
-  </li>
 
   <li ng-show="users.currentUser">
     <button type="button" ng-click="users.deleteUser({id: user._id})" class="btn btn-danger">Delete User Profile</button>
   </li>
-
 </div>

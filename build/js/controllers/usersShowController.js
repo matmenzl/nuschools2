@@ -2,19 +2,21 @@ angular
 .module('nuschools')
 .controller('UsersShowController', UsersShowController);
 
-UsersShowController.$inject = ['User', '$stateParams'];
-function UsersShowController(User, $stateParams){
+UsersShowController.$inject = ['User', '$stateParams', '$state'];
+function UsersShowController(User, $stateParams, $state){
 
   var self   = this;
+  self.deleteUser = deleteUser;
+
 
   User.get($stateParams, function(data){
     self.user = data.user;
   });
 
   function deleteUser(user){
-    User.delete({id: user._id});
-    var index = self.users.indexOf(user);
-    self.users.splice(index, 1);
+    User.remove($stateParams, function(){
+      $state.go("usersIndex")
+    })
   }
 
   function updateUser(user) {

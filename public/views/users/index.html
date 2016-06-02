@@ -1,6 +1,6 @@
 <div ng-controller="UsersIndexController" class="row">
-  <div class="col-sm-9 col-md-9 centered">
-    <p>Search Users <input class="form-control" type="text" ng-model="search"></p>
+  <div class="col-sm-12 col-md-12 centered">
+    <p><strong></strong><input class="form-control" type="text" ng-model="search" placeholder="Filter Users"></p>
   </div>
   <ul>
     <li ng-repeat="user in users.all | filter:search" class="col-sm-6 col-md-4">

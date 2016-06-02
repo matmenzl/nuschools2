@@ -1,23 +1,32 @@
 <!-- request page for group-owner -->
 
 <h2>Requests</h2>
-<ul class="media-list">
+<div class="row">
+<ul>
   <li ng-repeat="group in requests.all">
     <ul>
-      <li class="media" ng-repeat="request in group.requests | filter: { status: 'pending' }">
-        <div class="media-left">
+      <li ng-repeat="request in group.requests | filter: { status: 'pending' }" class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <h3>{{ request.type }}</h3>
+          <h4>{{ request.status }}</h4>
           <a ui-sref="user({ id: user._id })">
             <img class="media-object" ng-src="{{ request.sender.image }}">
           </a>
-        </div>
-        {{ request.status }}
-        <div class="media-body">
-          <h4 class="media-heading">({{ request.type }}) Request from {{ request.sender.username }}</h4>
-          <h4>Teaching: {{ group.title }}</h4>
-          <button ng-click="requests.accept(request)">Accept</button>
-          <button ng-click="requests.reject(request)">Reject</button>
-        </div>
+            <i class="fa fa-info" aria-hidden="true"></i>
+            <ul>
+              <h3>{{ request.sender.username }}</h3>
+
+              <h4>
+              {{ group.image }}
+              {{ group.title }}</h4>
+            </ul>
+          <button ng-click="requests.accept(request)" class="btn btn-default">Accept</button>
+          <button ng-click="requests.reject(request)" class="btn btn-default">Reject</button>
+          </div>
+          </div>
+
       </li>
     </ul>
   </li>
 </ul>
+</div>
