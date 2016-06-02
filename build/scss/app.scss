@@ -8,6 +8,9 @@ $primary-color: #C6424F;
 $button-color: #335DC3;
 $font-color: #42546C;
 $green: #70EAAA;
+$blue: #70a9d3;
+$yellow: #FDFF57;
+
 
 main.container {
   width: 100%;
@@ -18,9 +21,17 @@ li {
   list-style:none;
 }
 
-.media-body {
-  width: 640px;
-  float:left; 
+img.user {
+  border-radius: 50%;
+}
+
+.thumbnail {
+  border: 5px solid #70EAAA;
+}
+
+#search {
+  width: 50%;
+  text-align:center;
 }
 
 

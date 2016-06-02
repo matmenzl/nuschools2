@@ -48692,7 +48692,7 @@ angular
 
 MainRouter.$inject = ['$stateProvider', "$locationProvider", '$urlRouterProvider'];
 function MainRouter($stateProvider, $locationProvider, $urlRouterProvider) {
-  // $locationProvider.html5Mode(true)
+  $locationProvider.html5Mode(true)
   $stateProvider
     .state('home', {
       url: "/",

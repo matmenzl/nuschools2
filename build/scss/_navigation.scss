@@ -21,3 +21,19 @@ grey: #42546C
 .navbar {
   border: none;
 }
+
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: transparent;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color:transparent;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #C6424F;
+}

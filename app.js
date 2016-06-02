@@ -46,6 +46,7 @@ app.use('/api', expressJWT({ secret: secret })
   }));
 
 app.use(function (err, req, res, next) {
+  console.log("authError", err, req, res);
   if (err.name === 'UnauthorizedError') {
     return res.status(401).json({message: 'Unauthorized request.'});
   }
@@ -55,6 +56,7 @@ app.use(function (err, req, res, next) {
 app.use(assignUser);
 
 function assignUser(req, res, next) {
+  console.log("assignUser", res.sendfile);
   if (req.user) {
     req.currentUser = req.user._doc;
   }
@@ -69,4 +71,6 @@ app.get("/*", function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-app.listen(config.port);
+app.listen(config.port, function() {
+  console.log("Express is running...");
+});

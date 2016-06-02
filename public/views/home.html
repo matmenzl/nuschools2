@@ -1,7 +1,7 @@
 <div class="jumbotron">
 <div id="home-claim">
-  <h1>Death to schools</h1>
-  <h2>Learn in learning groups</h2>
+  <h1>Leave your comfort zone</h1>
+  <h2>Learn something new today!</h2>
 </div>
 </div>
 
@@ -17,24 +17,39 @@
   </li>
 </div>
 
-<div id="home-overview">
+<div ng-show="users.checkLoggedIn()" id="home-overview">
   <li>
-    <h4>Recently created learning groups</h4>
+    <h1>Recently created learning groups</h1>
   </li>
-    <div ng-controller="GroupsIndexController as groups">
-      <ul ng-repeat="group in groups.all">
-        <li class="media">
-          <div class="media-left">
-            <a ui-sref="groupsShow({ id: group._id })">
-              <img class="media-object" ng-src="{{ group.image }}">
-            </a>
-          </div>
-          <div class="media-body">
-            <a ui-sref="groupsShow({ id: group._id })">
-              <h3 class="media-heading">{{ group.title }}</h3>
-            </a>
-          </div>
-        </li>
-      </ul>
+  <div ng-controller="GroupsIndexController as groups" class="row">
+    <div ng-repeat="group in groups.all" class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <a ui-sref="groupsShow({ id: group._id })">
+          <img class="media-object" ng-src="{{ group.image }}">
+        </a>
+        <div class="caption">
+          <a ui-sref="groupsShow({ id: group._id })">
+            <h3 class="media-heading">{{ group.title }}</h3>
+          </a>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
+
+  <div id="teacher-info">
+    <div>
+      <h2>Teach a group and earn money</h2>
+      <h3>User your knowledge and wisdom, pass it on, and earn money with it. It's like AirBnB - just for teachers.</h3>
+      <li ng-show="users.checkLoggedIn()">
+        <a ui-sref="groupsNew"><button class="btn btn-default home">Create a Group</button></a>
+      </li>
+      <li ng-hide="users.checkLoggedIn()">
+        <a ui-sref="login"><button class="btn btn-default home">Login</button></a>
+      </li>
+      <li ng-hide="users.checkLoggedIn()">
+        <a ui-sref="register"><button class="btn btn-default home">Register</button></a>
+      </li>
+    </div>
+  </div>
+

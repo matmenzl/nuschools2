@@ -1,46 +1,51 @@
-<h2>Groups</h2>
-<!--   add filter -->
+<h2>Learning Groups</h2>
 <div ng-controller="GroupsIndexController">
-  <p>Search Groups<input type="text" ng-model="search"></p>
-<ul class="media-list">
-  <li class="media" ng-repeat="group in groups.all | filter:search">
-    <div class="media-left">
-      <a ui-sref="groupsShow({ id: group._id })">
-        <img class="media-object" ng-src="{{ group.image }}">
-      </a>
-    </div>
-    <div class="media-body">
-      <a ui-sref="groupsShow({ id: group._id })">
-        <h3 class="media-heading">{{ group.title }}</h3>
-      </a>
-      <p>
-        <strong>Created by: 
-          <a ui-sref="usersShow({ id: group.owner._id })">
-            {{ group.owner.username }}
-          </a>
-        </strong>
-      </p>
-      <p ng-show="group.teacher">
-        <strong>Taught by: 
-          <a ui-sref="usersShow({ id: group.teacher._id })">
-            {{ group.teacher.username }}
-          </a>
-        </strong>
-      </p>
-      <p>{{ group.description }}</p>
-      <ul>
-        <li ng-hide="group.teacher">
-          <button class="btn btn-default" ng-click="groups.sendRequest(group._id, 'teacher')">Request to Teach</button>
-        </li>
-        <li>
-          <button class="btn btn-default" ng-click="groups.sendRequest(group._id, 'student')">Join</button>
-        </li>
-        <li>
-          <button ui-sref="groupsShow({ id: group._id })" class="btn btn-default">More Info</button>
+  <p>Search Groups <input type="text" ng-model="search"></p>
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <ul class="media-list">
+        <li class="media" ng-repeat="group in groups.all | filter:search">
+          <div class="thumbnail">
+            <div class="media-left">
+              <a ui-sref="groupsShow({ id: group._id })">
+                <img class="media-object" ng-src="{{ group.image }}">
+              </a>
+            </div>
+            <a ui-sref="groupsShow({ id: group._id })">
+              <h3 class="media-heading">{{ group.title }}</h3>
+            </a>
+            <p>
+              <strong>Created by: 
+                <a ui-sref="usersShow({ id: group.owner._id })">
+                  {{ group.owner.username }}
+                </a>
+              </strong>
+            </p>
+            <p ng-show="group.teacher">
+              <strong>Taught by: 
+                <a ui-sref="usersShow({ id: group.teacher._id })">
+                  {{ group.teacher.username }}
+                </a>
+              </strong>
+            </p>
+            <p>{{ group.description }}</p>
+            <ul>
+              <li ng-hide="group.teacher">
+                <button class="btn btn-default" ng-click="groups.sendRequest(group._id, 'teacher')">Request to Teach</button>
+              </li>
+              <li>
+                <button class="btn btn-default" ng-click="groups.sendRequest(group._id, 'student')">Join</button>
+              </li>
+              <li>
+                <button ui-sref="groupsShow({ id: group._id })" class="btn btn-default">More Info</button>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
     </div>
-  </li>
-</ul>
+  </div>
+</div>
+
 
 
