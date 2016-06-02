@@ -11,7 +11,7 @@ var userSchema = mongoose.Schema({
   image: { type: String },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  group: [{ type: mongoose.Schema.ObjectId, ref: 'Group' }]
+  groups: [{ type: mongoose.Schema.ObjectId, ref: 'Group' }]
 });
 
 // INCLUDE PASSWORD CONFIRMATION

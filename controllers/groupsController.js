@@ -43,6 +43,7 @@ function groupsShow(req, res){
   .findById(req.params.id)
   .populate(["owner", "teacher", "students"])
   .exec(function(err, group){
+
     if (err) return res.status(404).json({message: 'Something went wrong.'});
     return res.status(200).json({ group: group });
   });

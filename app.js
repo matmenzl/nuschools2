@@ -56,7 +56,6 @@ app.use(function (err, req, res, next) {
 app.use(assignUser);
 
 function assignUser(req, res, next) {
-  console.log("assignUser", res.sendfile);
   if (req.user) {
     req.currentUser = req.user._doc;
   }

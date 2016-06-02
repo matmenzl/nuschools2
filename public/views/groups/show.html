@@ -1,41 +1,48 @@
 <!-- If not owner of the group: -->
 <div class="row">
-  <h2>{{ groups.group.title | uppercase }}</h2>
-  <h3>{{ groups.group.teacher.username }}</h2>
-  <img ng-src="{{ groups.group.image }}">
-  <p>{{ groups.group.description }}</p>
+<div class="thumbnail">
+    <h2>{{ groups.group.title | uppercase }}</h2>
+    <h3>Teacher: {{ groups.group.teacher.username }}</h3>
+    <img ng-src="{{ groups.group.image }}">
+    <p>{{ groups.group.description }}</p>
+
+    <ul>
+      <li ng-hide="group.teacher">
+        <button class="btn btn-default" ng-click="groups.requestToTeach(group._id, group.owner._id)">Request to Teach</button>
+      </li>
+      <li>
+        <button class="btn btn-default" ng-click="groups.requestToStudy(group._id, group.owner._id)">Join</button>
+      </li>
+      <li>
+        <button ui-sref="groupsShow({ id: group._id })" class="btn btn-default">More Info</button>
+      </li>
+      <li ng-show="groups.group.owner">
+        <button type="button" ng-click="groups.deleteGroup({id: group._id})" class="btn btn-danger">Delete</button>
+      </li>
+    </ul>
+  </div>
 </div>
 
-<ul>
-  <!-- if no Teacher for Group -->
-  <li ng-hide="group.teacher">
-    <button class="btn btn-default" ng-click="groups.requestToTeach(group._id, group.owner._id)">Request to Teach</button>
-  </li>
-  <!-- TO DO if open places for students -->
-  <li>
-    <button class="btn btn-default" ng-click="groups.requestToStudy(group._id, group.owner._id)">Join</button>
-  </li>
-  <li>
-    <button ui-sref="groupsShow({ id: group._id })" class="btn btn-default">More Info</button>
-  </li>
-  <li ng-show="groups.group.owner">
-    <button type="button" ng-click="groups.deleteGroup({id: group._id})" class="btn btn-danger">Delete</button>
-  </li>
-</ul>
-
-<ul class="media-list">
-  <li class="media" ng-repeat="user in groups.group.students">
-    <div class="media-left">
-      <a ui-sref="usersShow({ id: user._id })">
-        <img class="media-object" ng-src="{{ user.image }}">
-      </a>
+  <h4>Students</h4>
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <ul class="media-list">
+          <li class="media" ng-repeat="user in groups.group.students">
+            <div class="media-left">
+              <a ui-sref="usersShow({ id: user._id })">
+                <img class="media-object" ng-src="{{ user.image }}">
+              </a>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">{{ user.username }}</h4>
+              <p>{{ user.email }}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="media-body">
-      <h4 class="media-heading">{{ user.username }}</h4>
-      <p>{{ user.email }}</p>
-    </div>
-  </li>
-</ul>
+  </div>
 
 
 

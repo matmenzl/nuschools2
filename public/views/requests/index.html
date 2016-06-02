@@ -7,18 +7,15 @@
     <ul>
       <li ng-repeat="request in group.requests | filter: { status: 'pending' }" class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <h3>{{ request.type }}</h3>
-          <h4>{{ request.status }}</h4>
           <a ui-sref="user({ id: user._id })">
             <img class="media-object" ng-src="{{ request.sender.image }}">
           </a>
             <i class="fa fa-info" aria-hidden="true"></i>
             <ul>
-              <h3>{{ request.sender.username }}</h3>
-
-              <h4>
-              {{ group.image }}
-              {{ group.title }}</h4>
+              <h3>Request from: {{ request.sender.username }}</h3>
+              <h4>Request for Group: {{ group.title }}</h4>
+              <h3>Request as: {{ request.type }}</h3>
+              <h4>Request status: {{ request.status }}</h4>
             </ul>
           <button ng-click="requests.accept(request)" class="btn btn-default">Accept</button>
           <button ng-click="requests.reject(request)" class="btn btn-default">Reject</button>

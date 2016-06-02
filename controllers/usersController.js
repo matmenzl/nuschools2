@@ -1,4 +1,5 @@
 var User   = require('../models/user');
+var Group  = require('../models/group');
 
 function usersIndex(req, res) {
   User.find(function(err, users){
@@ -8,11 +9,25 @@ function usersIndex(req, res) {
 }
 
 function usersShow(req, res){
-  User.findById(req.params.id, function(err, user){
-    if (err) return res.status(404).json({message: 'Something went wrong.'});
-    res.status(200).json({ user: user });
-  });
+  console.log("req.body:\n\n", req.body);
+
+  Group.find({ $or : [{ teacher: req.currentUser._id }, { "students": req.currentUser._id }]}, function(err, groups) {
+    // console.log(groups);
+    User.findById(req.params.id, function(err, user){
+  
+      user.groups = groups;
+      res.status(200).json({ user: user });
+    });
+  });  
 }
+
+
+// function usersShow(req, res){
+//   User.findById(req.params.id, function(err, user){
+//     if (err) return res.status(404).json({message: 'Something went wrong.'});
+//     res.status(200).json({ user: user });
+//   });
+// }
 
 function usersUpdate(req, res){
   User.findById(req.params.id,  function(err, user) {

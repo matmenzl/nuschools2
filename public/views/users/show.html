@@ -1,34 +1,27 @@
 <div class="row">
-
+  <div class="thumbnail">
   <h2>{{ users.user.username | uppercase }}</h2>
-  <img ng-src="{{ users.user.image }}">
-  <p>{{ users.user.email }}</p>
-  <p>{{ users.user.city }}</p>
+      <img class="user" ng-src="{{ users.user.image }}">
+      <p>{{ users.user.email }}</p>
+      <p>{{ users.user.city }}</p>
+<!--       <p ng-repeat="group in users.user.groups">{{ group.title }}</p>
+ -->    </div>
+</div>
 
 
-  <h2>{{ users.user.username | uppercase }} is a Student in</h2>
-  <div ng-controller="RequestsIndexController as requests">
-    <div ng-controller="GroupsIndexController as groups">
-      <div ng-repeat="group in requests.all">
-        <div ng-repeat="request in group.requests | filter: { type: 'student' }">
-        <img class="group" ng-src="{{ group.image }}">
-        <h4>{{ group.title }}</h4>
-        </div>
-      </div>
-    </div>
+<h4>Member of</h4>
+<div class="row">
+<div class="col-sm-6 col-md-4">
+  <div class="thumbnail">
+    <ul class="media-list">
+      <li class="media" ng-repeat="group in users.user.groups">
+        <h4 class="media-heading">{{ group.title }}</h4>
+        <a <img class="media-object" ng-src="{{ group.image }}"></a>
+      </li>
+    </ul>
   </div>
-
-  <h2>{{ users.user.username | uppercase }} is a Teacher in</h2>
-  <div ng-controller="RequestsIndexController as requests">
-    <div ng-controller="GroupsIndexController as groups">
-      <div ng-repeat="group in requests.all">
-        <div ng-repeat="request in group.requests | filter: { type: 'teacher' }">
-          <img {{ group.image }}</h4>
-          <h4>{{ group.title }}</h4>
-        </div>
-      </div>
-    </div>
   </div>
+</div>
 
 
 

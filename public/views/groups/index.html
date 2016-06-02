@@ -3,7 +3,7 @@
   <p><strong></strong> <input class="form-control" type="text" ng-model="search" placeholder="Filter Learning Groups"></p>
   </div>
   <ul>
-    <li ng-repeat="group in groups.all | filter:search" class="col-sm-6 col-md-4" >
+    <li ng-repeat="group in groups.all | filter:search" class="col-sm-6 col-md-4">
       <div class="thumbnail">
         <a ui-sref="groupsShow({ id: group._id })">
           <img ng-src="{{ group.image }}">
@@ -14,6 +14,7 @@
         <p>
           <strong>Created by: 
             <a ui-sref="usersShow({ id: group.owner._id })">
+           
               {{ group.owner.username }}
             </a>
           </strong>
