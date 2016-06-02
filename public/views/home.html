@@ -21,18 +21,20 @@
   <li>
     <h4>Recently created learning groups</h4>
   </li>
-    <div ng-controller="GroupsIndexController as group">
-      <li class="media" ng-repeat="group in groups.all">
-        <div class="media-left">
-          <a ui-sref="groupsShow({ id: group._id })">
-          <img class="media-object" ng-src="{{ group.image }}">
-          </a>
-        </div>
-        <div class="media-body">
-          <a ui-sref="groupsShow({ id: group._id })">
-          <h3 class="media-heading">{{ group.title }}</h3>
-          </a>
-        </div>
-      </li>
+    <div ng-controller="GroupsIndexController as groups">
+      <ul ng-repeat="group in groups.all">
+        <li class="media">
+          <div class="media-left">
+            <a ui-sref="groupsShow({ id: group._id })">
+              <img class="media-object" ng-src="{{ group.image }}">
+            </a>
+          </div>
+          <div class="media-body">
+            <a ui-sref="groupsShow({ id: group._id })">
+              <h3 class="media-heading">{{ group.title }}</h3>
+            </a>
+          </div>
+        </li>
+      </ul>
     </div>
 </div>
