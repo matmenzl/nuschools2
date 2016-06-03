@@ -1,31 +1,29 @@
+<div class="container">
 <div class="row">
   <div class="thumbnail">
   <h2>{{ users.user.username | uppercase }}</h2>
       <img class="user" ng-src="{{ users.user.image }}">
       <p>{{ users.user.email }}</p>
       <p>{{ users.user.city }}</p>
-<!--       <p ng-repeat="group in users.user.groups">{{ group.title }}</p>
- -->    </div>
-</div>
-
-
-<h4>Member of</h4>
-<div class="row">
-<div class="col-sm-6 col-md-4">
-  <div class="thumbnail">
-    <ul class="media-list">
-      <li class="media" ng-repeat="group in users.user.groups">
-        <h4 class="media-heading">{{ group.title }}</h4>
-        <a <img class="media-object" ng-src="{{ group.image }}"></a>
-      </li>
-    </ul>
   </div>
+
+
+  <h4>Member of</h4>
+  <div class="row">
+    <div class="col-sm-4 col-md-6">
+      <div class="thumbnail">
+        <ul class="media-list">
+          <li class="media" ng-repeat="group in users.user.groups">
+            <h4 class="media-heading">{{ group.title }}</h4>
+            <a <img class="media-object" ng-src="{{ group.image }}"></a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-</div>
-
-
-
   <li ng-show="users.currentUser">
     <button type="button" ng-click="users.deleteUser({id: user._id})" class="btn btn-danger">Delete User Profile</button>
   </li>
 </div>
+</div>
+

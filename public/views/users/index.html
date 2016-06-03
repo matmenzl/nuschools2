@@ -1,9 +1,9 @@
 <div ng-controller="UsersIndexController" class="row">
   <div class="col-sm-12 col-md-12 centered">
-    <p><strong></strong><input class="form-control" type="text" ng-model="search" placeholder="Filter Users"></p>
+    <p><strong></strong><input class="form-control" type="text" ng-model="search" placeholder="Search for Users"></p>
   </div>
   <ul>
-    <li ng-repeat="user in users.all | filter:search" class="col-sm-6 col-md-4">
+    <li ng-repeat="user in users.all | filter:search" class="col-sm-3 col-md-3 col-lg-2">
       <div class="thumbnail">
           <a ui-sref="usersShow({ id: user._id })">
             <img class="user" ng-src="{{ user.image }}">
